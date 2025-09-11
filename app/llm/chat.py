@@ -118,16 +118,28 @@ def generate(
         model_device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     inputs = {k: v.to(model_device) for k, v in inputs.items()}
 
-    gen_ids = model.generate(
-        **inputs,
-        max_new_tokens=max_new_tokens,
-        do_sample=do_sample,
-        temperature=temperature,
-        top_p=top_p,
-        top_k=top_k,
-        repetition_penalty=repetition_penalty,
-        pad_token_id=tokenizer.eos_token_id,
-    )
+    greedy = (do_sample is False) or (temperature is not None and float(temperature) <= 0)
+
+    gen_kwargs = {
+        "max_new_tokens": int(max_new_tokens),
+        "repetition_penalty": float(repetition_penalty),
+        "pad_token_id": tokenizer.eos_token_id,
+        "do_sample": not greedy,  # bool
+    }
+
+    if not greedy:
+        # Only include sampling knobs when actually sampling
+        # (avoid passing None/0 which triggers warnings)
+        if temperature is not None and float(temperature) > 0:
+            gen_kwargs["temperature"] = float(temperature)
+        if top_p is not None:
+            gen_kwargs["top_p"] = float(top_p)
+        if top_k is not None and int(top_k) > 0:
+            gen_kwargs["top_k"] = int(top_k)
+
+    # Call HF generate with a *clean* kwargs set
+    gen_ids = model.generate(**inputs, **gen_kwargs)
+    
     prompt_len = inputs["input_ids"].shape[1]
     new_tokens = gen_ids[0][prompt_len:]
     out = tokenizer.decode(new_tokens, skip_special_tokens=True)
