@@ -1,0 +1,79 @@
+{
+  "file_name": "studentaffairs.stanford.edu/cdc",
+  "pages": 3,
+  "is_cv": true,
+  "detector_score": 0.85,
+  "name": "BEN PIERCE",
+  "email": "pierce@stanford.edu",
+  "phone": "(650) 555-2190",
+  "location": "Stanford, CA",
+  "websites": ["https://studentaffairs.stanford.edu/cdc", "https://www.stanford.edu"],
+  "objective": "To obtain a position as a paralegal with a corporate law firm.",
+  "summary": "This resume highlights Ben Pierce's academic background, professional experience, and contributions to law and management.",
+  "education": [
+    {
+      "institution": "Stanford University",
+      "location": "Stanford, CA",
+      "degree": "BA degree in Psychology",
+      "year": "9/XX - 6/XX"
+    }
+  ],
+  "experience": [
+    {
+      "company": "Crew Member, Pierce’s Asphalt and Seal Coating Service, Crabapple Cove, WI",
+      "location": "Crabapple Cove, WI",
+      "role": "Crew Member",
+      "start_date": "6/XX",
+      "end_date": "9/XX",
+      "description": "Researched language development in infants utilizing both library resources and experimental data. Generated written report of research project results."
+    },
+    {
+      "company": "Stanford University, Stanford, CA",
+      "location": "Stanford, CA",
+      "role": "Senior Class President",
+      "start_date": "9/XX",
+      "end_date": "6/XX",
+      "description": "Planned events and activities for the Stanford senior class. Contacted businesses targeted for participation in these events. Organized and supervised committees to assist in publicizing, promoting and raising funds for various senior class functions."
+    },
+    {
+      "company": "Stanford University, Stanford, CA",
+      "location": "Stanford, CA",
+      "role": "President, Senior Class, Stanford University",
+      "start_date": "6/XX",
+      "end_date": "9/XX",
+      "description": "Acted as senior class liaison to University officials. Informed them of senior class activities and enlisted their support and approval. Discussed campaign platform and issues at residence halls while running for class office."
+    }
+  ],
+  "projects": [
+    {
+      "title": "SPLASH Underserved Student Recruiter and Teacher",
+      "location": "Stanford, CA",
+      "description": "Communicated with primary contacts at various low-income high schools in the bay area to draw hundreds of students to attend Fall SPLASH 2012. Assisted in the logistical planning as a member of the administration team. Taught classes on the biology and historical context of lactose intolerance to students attending Spring SPLASH 20XX."
+    },
+    {
+      "title": "ThinkMath Instructor, Trainer, and Assistant Team Lead",
+      "location": "Stanford, CA",
+      "description": "Taught elementary school students from a Singaporean math curriculum. Led training sessions for new ThinkMath instructors about lesson planning and teaching techniques. Organized placement results for students and communicated with parents on site."
+    }
+  ],
+  "skills": [
+    "Languages: English (proficient)",
+    "Computer Skills: Microsoft Office Suite, Macromedia Suite, DreamWeaver, PhotoShop",
+    "Other: Alpha Kappa Delta Phi Sorority Vice President of Community Service & Philanthropy, Multicultural Greek Council Representative & Recruitment Chair, Data Intern at Center for Interdisciplinary Brain Science Research, Stanford Immersion in Medicine Physician Shadowing Program"
+  ],
+  "flat_skills": [
+    "Languages: English (proficient)",
+    "Computer Skills: Microsoft Office Suite, Macromedia Suite, DreamWeaver, PhotoShop",
+    "Other: Alpha Kappa Delta Phi Sorority Vice President of Community Service & Philanthropy, Multicultural Greek Council Representative & Recruitment Chair, Data Intern at Center for Interdisciplinary Brain Science Research, Stanford Immersion in Medicine Physician Shadowing Program"
+  ],
+  "certifications": ["Stanford University CPR/AED for Professional Rescuers"],
+  "awards": ["Bio-X Undergraduate Summer Research Grant"],
+  "publications": ["Smithfield A, Doe J. Ethical Challenges in Enrolling Women in Research Studies. Journal of Medical Ethics, 2020."],
+  "languages": [
+    "English (proficient)"
+  ],
+  "activities": [
+    "SPLASH Underserved Student Recruiter and Teacher",
+    "ThinkMath Instructor, Trainer, and Assistant Team Lead"
+  ]
+}

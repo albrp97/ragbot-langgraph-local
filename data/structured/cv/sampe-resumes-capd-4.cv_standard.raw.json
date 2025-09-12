@@ -1,0 +1,116 @@
+{
+  "file_name": "mathamaddoxmit.edu",
+  "pages": 1,
+  "is_cv": true,
+  "detector_score": 0.85,
+  "name": "Matha Maddox",
+  "email": "matha@mit.edu",
+  "phone": "617-XXX-XXXX",
+  "location": "My City, My Country",
+  "websites": ["https://matha@mit.edu"],
+  "objective": "To contribute to the advancement of science and technology through education and innovation.",
+  "summary": "This resume highlights Matha Maddox's academic and professional achievements in mathematics, computer science, and related fields.",
+  "education": [
+    {
+      "institution": "Massachusetts Institute of Technology (MIT)",
+      "location": "Cambridge, MA",
+      "degree": "Candidate for a Bachelor of Science degree in Mathematics with Computer Science",
+      "year": "June 2013"
+    },
+    {
+      "institution": "MIT Sloan School of Management",
+      "location": "Cambridge, MA",
+      "degree": "Undergraduate Researcher",
+      "year": "June 2010 – October 2010"
+    }
+  ],
+  "experience": [
+    {
+      "company": "Telecommunications Company",
+      "location": "Paris, France",
+      "role": "Operations Research Analyst",
+      "start_date": "June 2010",
+      "end_date": "Present",
+      "description": "Assessed financial risks involved with participating in online advertising-space exchanges. Devised bidding policies for auctions at the exchanges that led to victories three times out of five and built mathematical models around these policies to increase the company’s margin from online ad-spaces by 5%"
+    },
+    {
+      "company": "MIT Sloan School of Management",
+      "location": "Cambridge, MA",
+      "role": "Undergraduate Researcher",
+      "start_date": "June 2010",
+      "end_date": "October 2010",
+      "description": "Conducted experimental prediction markets with human and artificial intelligence to find the best tools to predict future events such as election-results or the stock market. Developed an experiment-procedure online that reduced bias by eliminating involvement of the experimenter and saved two hours and $200 per experiment"
+    },
+    {
+      "company": "MIT Center for Collective Intelligence",
+      "location": "Cambridge, MA",
+      "role": "Undergraduate Researcher",
+      "start_date": "June 2010",
+      "end_date": "October 2010",
+      "description": "Conducted individual and group IQ/EQ tests on human subjects to formulate ways to measure and predict the performance of individuals working as part of a team and the efficacy of the team dynamic. Saved four hours of experiment-time per day by redesigning the experiment-procedure so that each experiment could be held with three fewer researchers and up to six experiments could be held at the same time"
+    },
+    {
+      "company": "MIT Tech Callers",
+      "location": "Cambridge, MA",
+      "role": "Caller",
+      "start_date": "February 2010",
+      "end_date": "June 2010",
+      "description": "Communicated with MIT alumni on behalf of the MIT Alumni Association and raised $5,000 in donations"
+    },
+    {
+      "company": "MIT Undergraduate Association",
+      "location": "Cambridge, MA",
+      "role": "Member of Committee on Student Life",
+      "start_date": "February 2011",
+      "end_date": "Present",
+      "description": "Organized a week long convention of 3,000 students with activities geared towards improving health on campus. Linked 376 freshmen to upperclassmen with similar career objectives in a one-on-one mentoring relationship"
+    },
+    {
+      "company": "MIT International Science and Technology Initiatives",
+      "location": "Milan, Italy and Cambridge, MA",
+      "role": "Advisor and Teacher",
+      "start_date": "September 2010",
+      "end_date": "March 2011",
+      "description": "Taught Mathematics and Physics to 500 high school students in Italy and advised teachers on inexpensive ways of making their lessons interactive that helped each school save up to $1300 a year"
+    },
+    {
+      "company": "The XYZ Newpress",
+      "location": "My City, Country",
+      "role": "Founder and Editor",
+      "start_date": "October 2006",
+      "end_date": "May 2008",
+      "description": "Led a staff of 25 high-school students to develop the first English newspaper to be printed and distributed in My Country. Converted it to a trilingual newspaper and increased profitability by 25% in two years"
+    }
+  ],
+  "projects": [
+    {
+      "title": "SPLASH Underserved Student Recruiter and Teacher",
+      "location": "Stanford, CA",
+      "description": "Communicated with primary contacts at various low-income high schools in the bay area to draw hundreds of students to attend Fall SPLASH 2012. Assisted in the logistical planning as a member of the administration team. Taught classes on the biology and historical context of lactose intolerance to students attending Spring SPLASH 20XX."
+    },
+    {
+      "title": "ThinkMath Instructor, Trainer, and Assistant Team Lead",
+      "location": "Stanford, CA",
+      "description": "Taught elementary school students from a Singaporean math curriculum. Led training sessions for new ThinkMath instructors about lesson planning and teaching techniques. Organized placement results for students and communicated with parents on site."
+    }
+  ],
+  "skills": [
+    "Languages: Fluent - French and Native - Hindi",
+    "Software: LATEX, GLPK, Microsoft Office",
+    "Activities: Member-Delta Psi Fraternity, Choreographer - MIT Dance Troupe, Journalist - The Tech"
+  ],
+  "flat_skills": [
+    "Languages: Fluent - French and Native - Hindi",
+    "Software: LATEX, GLPK, Microsoft Office"
+  ],
+  "certifications": ["AzURE AI-900", "Stanford University CPR/AED for Professional Rescuers"],
+  "awards": ["Bio-X Undergraduate Summer Research Grant"],
+  "publications": ["Matha Maddox, A. (2020). Ethical Challenges in Enrolling Women in Research Studies. Journal of Medical Ethics, 2020."],
+  "languages": [
+    "French, Hindi"
+  ],
+  "activities": [
+    "SPLASH Underserved Student Recruiter and Teacher",
+    "ThinkMath Instructor, Trainer, and Assistant Team Lead"
+  ]
+}

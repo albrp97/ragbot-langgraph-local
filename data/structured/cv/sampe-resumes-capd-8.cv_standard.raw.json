@@ -1,0 +1,119 @@
+{
+  "file_name": "mstcs-mit-resume",
+  "pages": 4,
+  "is_cv": true,
+  "detector_score": 0.85,
+  "name": "CHARLES MENG",
+  "email": "csmeng@mit.edu",
+  "phone": "617-123-4567",
+  "location": "Cambridge, MA",
+  "websites": ["https://www.mit.edu"],
+  "social_handles": [
+    "csmeng@mit.edu",
+    "csmeng.github.io"
+  ],
+  "objective": "To pursue a master’s degree in Computer Science and contribute to the field of assistive technologies through research and community engagement.",
+  "summary": "This resume highlights Charles Meng’s academic achievements and contributions to assistive technology and computer science.",
+  "education": [
+    {
+      "institution": "Massachusetts Institute of Technology (MIT)",
+      "location": "Cambridge, MA",
+      "degree": "Master of Engineering in Computer Science",
+      "year": "June 2015"
+    },
+    {
+      "institution": "Bachelor of Science in Computer Science",
+      "location": "June 2014"
+    }
+  ],
+  "experience": [
+    {
+      "company": "User Interface Design Group; CSAIL, MIT",
+      "location": "Cambridge, MA",
+      "role": "Researcher",
+      "start_date": "Oct. 2013–Present",
+      "end_date": "Present",
+      "description": "Designed search tools for code submission feedback and built search engines to improve efficiency. Developed clustering techniques for powergrading students’ code."
+    },
+    {
+      "company": "Assistive Technologies; MIT",
+      "location": "Cambridge, MA",
+      "role": "Student leader",
+      "start_date": "Feb. 2014–Present",
+      "end_date": "Present",
+      "description": "Led MIT undergrad courses on assistive technology. Founding member of the first MIT assistive tech hackathon and recruited five clients."
+    },
+    {
+      "company": "Introduction to Electrical Engineering and Computer Science; MIT",
+      "location": "Cambridge, MA",
+      "role": "Teaching assistant",
+      "start_date": "Feb. 2014–Present",
+      "end_date": "Present",
+      "description": "Managed lab assistants and delivered lectures on computer science concepts to over 500 students."
+    },
+    {
+      "company": "Middle East Education Through Technology (MEET) - Jerusalem, Israel",
+      "location": "May–July 2014",
+      "role": "Curriculum developer",
+      "start_date": "May–July 2014",
+      "end_date": "Present",
+      "description": "Developed a 3-week curriculum to teach web programming and Django to Israeli and Palestinian high-schoolers."
+    },
+    {
+      "company": "MIT International Science and Technology Initiative - Querétaro, Mexico",
+      "location": "June–July 2013",
+      "role": "Curriculum developer and instructor",
+      "start_date": "June–July 2013",
+      "end_date": "Present",
+      "description": "Established a class tailored to Mexican street children and taught in Spanish."
+    },
+    {
+      "company": "The Server Labs - Madrid, Spain",
+      "location": "June–Aug. 2012",
+      "role": "Software engineering intern",
+      "start_date": "June–Aug. 2012",
+      "end_date": "Present",
+      "description": "Created a user interface for cloud-based virtual environments and presented in Spanish before cloud computing professionals."
+    },
+    {
+      "company": "Affective Computing; Media Lab, MIT - Cambridge, MA",
+      "location": "June–Dec. 2011",
+      "role": "Undergraduate researcher",
+      "start_date": "June–Dec. 2011",
+      "end_date": "Present",
+      "description": "Introduced a user interface for CardioCam, a non-contact heart rate and blood pressure device."
+    }
+  ],
+  "projects": [
+    {
+      "title": "SPLASH Underserved Student Recruiter and Teacher",
+      "location": "Stanford, CA",
+      "description": "Communicated with primary contacts at various low-income high schools in the Bay Area to attract students to Fall SPLASH 2012. Taught biology and history classes on lactose intolerance."
+    },
+    {
+      "title": "ThinkMath Instructor, Trainer, and Assistant Team Lead",
+      "location": "Stanford, CA",
+      "description": "Taught Singaporean math curriculum and led training sessions for new instructors about lesson planning."
+    }
+  ],
+  "skills": [
+    "Django, WebDev Languages (HTML, CSS, JavaScript, jQuery), Python, C++, Java, MATLAB",
+    "Group leader for MIT Varsity Track and Field pole vaulters",
+    "Spanish, Hebrew, Pole vaulting, Gymnastics, Travel, Music"
+  ],
+  "flat_skills": [
+    "Django, WebDev Languages (HTML, CSS, JavaScript, jQuery), Python, C++, Java, MATLAB",
+    "Group leader for MIT Varsity Track and Field pole vaulters",
+    "Spanish, Hebrew, Pole vaulting, Gymnastics, Travel, Music"
+  ],
+  "certifications": ["MIT CPR/AED for Professional Rescuers"],
+  "awards": ["Bio-X Undergraduate Summer Research Grant"],
+  "publications": ["Smithfield A, Doe J. Ethical Challenges in Enrolling Women in Research Studies. Journal of Medical Ethics, 2020."],
+  "languages": [
+    "Spanish, Hebrew"
+  ],
+  "activities": [
+    "SPLASH Underserved Student Recruiter and Teacher",
+    "ThinkMath Instructor, Trainer, and Assistant Team Lead"
+  ]
+}

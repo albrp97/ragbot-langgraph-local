@@ -1,0 +1,109 @@
+{
+  "file_name": "jane_doe_resume",
+  "pages": 3,
+  "is_cv": true,
+  "detector_score": 0.85,
+  "name": "Jane Doe",
+  "email": "someone@mit.edu",
+  "phone": "(XXX) XXX-XXXX",
+  "location": "Cambridge, MA",
+  "websites": ["https://someone@mit.edu", "http://xxx-mit.edu"],
+  "objective": "To contribute to the advancement of healthcare and scientific research through academic and professional endeavors.",
+  "summary": "This resume highlights Jane Doe's academic background, professional experience, and contributions to healthcare and scientific innovation.",
+  "education": [
+    {
+      "institution": "MASSACHUSETTS INSTITUTE OF TECHNOLOGY (M.I.T.)",
+      "location": "CAMBRIDGE, MA",
+      "degree": "Candidate for B.S. in Biology",
+      "year": "20XX"
+    },
+    {
+      "institution": "MIT PROGRAMS ON THE PHARMACEUTICAL INDUSTRY",
+      "location": "CAMBRIDGE, MA",
+      "degree": "Health Economics Research Assistant",
+      "year": "20XX"
+    }
+  ],
+  "experience": [
+    {
+      "company": "PUTNAM ASSOCIATES",
+      "location": "BURLINGTON, MA",
+      "role": "Analyst",
+      "start_date": "20XX",
+      "end_date": "Present",
+      "description": "Evaluated marketing strategies for a $100M organ transplant drug and developed models for forecasting drug success."
+    },
+    {
+      "company": "MERCK & CO.",
+      "location": "RAHWAY, NJ",
+      "role": "Pharmaceutical Laboratory Research Assistant",
+      "start_date": "20XX",
+      "end_date": "Present",
+      "description": "Identified deficiencies in diabetes drug targets and developed a new drug with improved market potential."
+    },
+    {
+      "company": "MIT CENTER FOR CANCER RESEARCH",
+      "location": "CAMBRIDGE, MA",
+      "role": "Academic Laboratory Research Assistant",
+      "start_date": "20XX - 20XX",
+      "end_date": "Present",
+      "description": "Developed a new sequencing technique to improve drug discovery efficiency."
+    },
+    {
+      "company": "MARCH OF DIMES BIRTH DEFECTS FOUNDATION",
+      "location": "BOSTON, MA",
+      "role": "Director of Massachusetts Youth Public Affairs",
+      "start_date": "20XX - Present",
+      "end_date": "Present",
+      "description": "Lobbied for public policy and organized events to promote health awareness."
+    },
+    {
+      "company": "JOURNAL OF YOUNG INVESTIGATORS",
+      "location": "CAMBRIDGE, MA",
+      "role": "Story Editor and Science Journalist",
+      "start_date": "20XX - Present",
+      "end_date": "Present",
+      "description": "Managed science journalism and created daily digests for science journalists."
+    },
+    {
+      "company": "SCIENCE & ENGINEERING BUSINESS CLUB",
+      "location": "CAMBRIDGE, MA",
+      "role": "Consulting Focus Group Organizing Committee",
+      "start_date": "20XX - Present",
+      "end_date": "Present",
+      "description": "Organized events to educate students about consulting and law careers."
+    }
+  ],
+  "projects": [
+    {
+      "title": "SPLASH Underserved Student Recruiter and Teacher",
+      "location": "Stanford, CA",
+      "description": "Communicated with primary contacts at various low-income high schools in the Bay Area to attract students to Fall SPLASH 2012."
+    },
+    {
+      "title": "ThinkMath Instructor, Trainer, and Assistant Team Lead",
+      "location": "Stanford, CA",
+      "description": "Taught elementary school students from a Singaporean math curriculum and led training sessions for new instructors."
+    }
+  ],
+  "skills": [
+    "Languages: English (proficient)",
+    "Computer Skills: Microsoft Office Suite, Macromedia Suite, DreamWeaver, PhotoShop",
+    "Other: Robert C. Byrd Scholarship, Rensselaer Medal, Track & Field, Photography, Oncology"
+  ],
+  "flat_skills": [
+    "Languages: English (proficient)",
+    "Computer Skills: Microsoft Office Suite, Macromedia Suite, DreamWeaver, PhotoShop",
+    "Other: Robert C. Byrd Scholarship, Rensselaer Medal, Track & Field, Photography, Oncology"
+  ],
+  "certifications": ["Robert C. Byrd Scholarship"],
+  "awards": ["Robert C. Byrd Scholarship"],
+  "publications": ["Robert C. Byrd Scholarship"],
+  "languages": [
+    "English (proficient)"
+  ],
+  "activities": [
+    "SPLASH Underserved Student Recruiter and Teacher",
+    "ThinkMath Instructor, Trainer, and Assistant Team Lead"
+  ]
+}

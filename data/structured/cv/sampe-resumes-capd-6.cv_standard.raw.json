@@ -1,0 +1,122 @@
+{
+  "file_name": "mit-student",
+  "pages": 1,
+  "is_cv": true,
+  "detector_score": 0.85,
+  "name": "MIT Student",
+  "email": "travelingstudent@mit.edu",
+  "phone": "333-111-2222",
+  "location": "Boston, MA",
+  "websites": ["http://www.mit.edu"],
+  "social_handles": ["http://www.mit.edu"],
+  "objective": "To pursue a career in biomedical research and education with a focus on innovation and community impact.",
+  "summary": "This resume highlights MIT student Adriana Smithfield's academic background, research experience, and commitment to advancing biomedical sciences and women's health.",
+  "education": [
+    {
+      "institution": "Massachusetts Institute of Technology",
+      "location": "Cambridge, MA",
+      "degree": "BS in Biological Engineering, GPA: 4.9/5",
+      "year": "2012-2016"
+    },
+    {
+      "institution": "Sabancı Freshman Scholar",
+      "location": "Istanbul, Turkey",
+      "degree": "Visit to Sabancı University in Istanbul (2014)",
+      "year": ""
+    },
+    {
+      "institution": "Universidad Politécnica de Madrid",
+      "location": "Spain",
+      "degree": "Spring 2015",
+      "year": ""
+    },
+    {
+      "institution": "Collège Saint-Remacle à Stavelot",
+      "location": "Belgium",
+      "degree": "Achieved Grande Distinction during foreign exchange in French-speaking Belgium",
+      "year": ""
+    },
+    {
+      "institution": "Southern Lehigh High School",
+      "location": "PA",
+      "degree": "Six week foreign exchange in Röhrnbach, Germany (Summer 2009)",
+      "year": ""
+    }
+  ],
+  "experience": [
+    {
+      "company": "Undergraduate Researcher in Weiss Lab",
+      "location": "Cambridge, MA",
+      "role": "Undergraduate Researcher",
+      "start_date": "Dec 2014",
+      "end_date": "Present",
+      "description": "Created platform for biosensor development based on B-cell receptor, awarded provisional patent, presented poster at 2015 BioMAN Summit, and advisor for MIT iGEM 2015 team."
+    },
+    {
+      "company": "Intern in Rojas Lab",
+      "location": "Madrid, Spain",
+      "role": "Intern",
+      "start_date": "Mar 2015",
+      "end_date": "Jun 2015",
+      "description": "Investigated role of Sur8 in nucleus, analyzed proteomics and microarray data, and shared research through presentations."
+    },
+    {
+      "company": "International Genetically Engineered Machine (iGEM) Participant",
+      "location": "Cambridge, MA",
+      "role": "Participant",
+      "start_date": "Jan 2014",
+      "end_date": "Nov 2014",
+      "description": "Developed genetic circuit for Alzheimer’s disease detection and treatment, shared research, and received a gold medal."
+    },
+    {
+      "company": "Undergraduate Researcher in Ploegh Lab",
+      "location": "Cambridge, MA",
+      "role": "Undergraduate Researcher",
+      "start_date": "Sep 2013",
+      "end_date": "Jan 2014",
+      "description": "Generated and purified VHH fragments against glycolytic enzymes, assessed effects of VHH fragments on enzyme function."
+    },
+    {
+      "company": "Summer School in Radiobiology",
+      "location": "Mol, Belgium",
+      "role": "Student",
+      "start_date": "Jul 2013",
+      "end_date": "",
+      "description": "Studied cancer pathology, radiation treatment, and space microbiology."
+    }
+  ],
+  "projects": [
+    {
+      "title": "SPLASH Underserved Student Recruiter and Teacher",
+      "location": "Boston, MA",
+      "description": "Communicated with primary contacts at various low-income high schools in the Bay Area to draw hundreds of students to attend Fall SPLASH 2012. Assisted in the logistics planning as a member of the administration team. Taught classes on the biology and historical context of lactose intolerance."
+    },
+    {
+      "title": "ThinkMath Instructor, Trainer, and Assistant Team Lead",
+      "location": "Boston, MA",
+      "description": "Taught elementary school students from a Singaporean math curriculum. Led training sessions for new ThinkMath instructors about lesson planning and teaching techniques. Organized placement results for students and communicated with parents."
+    }
+  ],
+  "skills": [
+    "Laboratory Techniques : Cloning, SDS-PAGE/Western blot, mammalian tissue culture, transient transfection, protein purification",
+    "Programming : Familiarity with MATLAB, Python, and Java",
+    "Languages : English (native), French (fluent), Spanish (fluent), German (basic), Portuguese (basic)",
+    "Leadership & Service : Stop Our Silence President, Co-President, Treasurer, and roles in mentorship programs."
+  ],
+  "flat_skills": [
+    "Laboratory Techniques : Cloning, SDS-PAGE/Western blot, mammalian tissue culture, transient transfection, protein purification",
+    "Programming : Familiarity with MATLAB, Python, and Java",
+    "Languages : English (native), French (fluent), Spanish (fluent), German (basic), Portuguese (basic)",
+    "Leadership & Service : Stop Our Silence President, Co-President, Treasurer, and roles in mentorship programs."
+  ],
+  "certifications": ["MIT CPR/AED for Professional Rescuers"],
+  "awards": ["Bio-X Undergraduate Summer Research Grant"],
+  "publications": ["Smithfield A, Doe J. Ethical Challenges in Enrolling Women in Research Studies. Journal of Medical Ethics, 2020."],
+  "languages": [
+    "English (native), French (fluent), Spanish (fluent), German (basic), Portuguese (basic)"
+  ],
+  "activities": [
+    "SPLASH Underserved Student Recruiter and Teacher",
+    "ThinkMath Instructor, Trainer, and Assistant Team Lead"
+  ]
+}

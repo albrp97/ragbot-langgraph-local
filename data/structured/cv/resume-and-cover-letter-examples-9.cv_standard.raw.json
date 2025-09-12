@@ -1,0 +1,107 @@
+{
+  "file_name": "studentaffairs.stanford.edu/cdc",
+  "pages": 3,
+  "is_cv": true,
+  "detector_score": 0.85,
+  "name": "Kenya Rios",
+  "email": "student@stanford.edu",
+  "phone": "650.123.4567",
+  "location": "Stanford, CA",
+  "websites": ["https://studentaffairs.stanford.edu/cdc", "https://www.stanford.edu"],
+  "objective": "To provide healthcare services to underserved communities and support underrepresented populations.",
+  "summary": "This resume highlights Kenya Rios's academic background, professional experience, and contributions to healthcare and education.",
+  "education": [
+    {
+      "institution": "Stanford University",
+      "location": "Stanford, CA",
+      "degree": "B.A. in American Studies with Mass Media & Consumer Culture focus, expected 6/XX - GPA: 3.7",
+      "year": "9/XX - Present"
+    },
+    {
+      "institution": "Stanford Bing Overseas Study Program—Paris, France",
+      "location": "Paris, France",
+      "degree": "Language, literature and theater/cinema courses taken",
+      "year": "9/XX - 12/XX"
+    }
+  ],
+  "experience": [
+    {
+      "company": "Stanford Concert Network—Stanford, CA—Chief of Staff / Publicity Manager",
+      "location": "Stanford, CA",
+      "role": "Chief of Staff / Publicity Manager",
+      "start_date": "4/XX",
+      "end_date": "Present",
+      "description": "Liaison between Executive Board and general staff; Lead meetings and planning of concert events; Manage print and media relations, marketing and external promotions."
+    },
+    {
+      "company": "Inphanyte Records—Stanford, CA—Executive Cabinet Member and Recording Artist",
+      "location": "Stanford, CA",
+      "role": "Executive Cabinet Member and Recording Artist",
+      "start_date": "11/XX",
+      "end_date": "Present",
+      "description": "Coordinate campus events to promote records and artists; Write lyrics and work in studio recording and editing."
+    },
+    {
+      "company": "Culture Pub (French television syndicated series)—Paris, France—Research Intern",
+      "location": "Paris, France",
+      "role": "Research Intern",
+      "start_date": "10/XX",
+      "end_date": "Present",
+      "description": "Devised new system to catalogue and retrieve film stock; Performed internet and archive research for upcoming specials."
+    },
+    {
+      "company": "Fender Center for the Performing Arts—Corona, CA—Programs Development Intern",
+      "location": "Corona, CA",
+      "role": "Programs Development Intern",
+      "start_date": "6/XX",
+      "end_date": "8/XX",
+      "description": "Selected to be Arts for Youth Fellow by Stanford’s Haas Center for Public Service; Implemented three month marketing plan resulting in increase of center recognition and concert attendance; Developed and designed music camp program for summer 20XX; Produced and directed promotional video as part of Capital Expansion Campaign."
+    },
+    {
+      "company": "Student Organizing Committee for the Arts—Stanford, CA—Selection Team Member",
+      "location": "Stanford, CA",
+      "role": "Selection Team Member",
+      "start_date": "1/XX",
+      "end_date": "4/XX",
+      "description": "Chose artists and track listings for Stanford Soundtrack, Vol. 3 and developed record image."
+    },
+    {
+      "company": "Stanford Student Enterprises—Stanford, CA—Account Executive, Advertising",
+      "location": "Stanford, CA",
+      "role": "Account Executive, Advertising",
+      "start_date": "6/XX",
+      "end_date": "9/XX",
+      "description": "Met and frequently exceeded weekly sales goals; Twice chosen as employee of the term; Designed several advertisements for clients and managed the accounts."
+    }
+  ],
+  "projects": [
+    {
+      "title": "SPLASH Underserved Student Recruiter and Teacher",
+      "location": "Stanford, CA",
+      "description": "Communicated with primary contacts at various low-income high schools in the bay area to draw hundreds of students to attend Fall SPLASH 2012. Assisted in the logistical planning as a member of the administration team. Taught classes on the biology and historical context of lactose intolerance to students attending Spring SPLASH 20XX."
+    },
+    {
+      "title": "ThinkMath Instructor, Trainer, and Assistant Team Lead",
+      "location": "Stanford, CA",
+      "description": "Taught elementary school students from a Singaporean math curriculum. Led training sessions for new ThinkMath instructors about lesson planning and teaching techniques. Organized placement results for students and communicated with parents on site."
+    }
+  ],
+  "skills": [
+    "Technical: Drupal web design, Photoshop, Illustrator, and InDesign",
+    "Language: Proficient in French"
+  ],
+  "flat_skills": [
+    "Technical: Drupal web design, Photoshop, Illustrator, and InDesign",
+    "Language: Proficient in French"
+  ],
+  "certifications": ["Stanford University CPR/AED for Professional Rescuers"],
+  "awards": ["Bio-X Undergraduate Summer Research Grant"],
+  "publications": ["Smithfield A, Doe J. Ethical Challenges in Enrolling Women in Research Studies. Journal of Medical Ethics, 2020."],
+  "languages": [
+    "French"
+  ],
+  "activities": [
+    "SPLASH Underserved Student Recruiter and Teacher",
+    "ThinkMath Instructor, Trainer, and Assistant Team Lead"
+  ]
+}
