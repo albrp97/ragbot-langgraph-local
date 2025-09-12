@@ -185,62 +185,139 @@ def run_ingest_plan(raw_dir: Path, report: Dict, collection_name: str = "docs_te
 
 
 # ---------- UI-friendly: generator with progress ----------
-def check_and_ingest_stream(raw_dir: Path, collection_name: str = "docs_text") -> Iterable[str]:
+def check_and_ingest_stream(raw_dir: Path, collection_name: str = "docs_text") -> Iterable[dict | str]:
     """
-    Yields status lines for Gradio while checking & ingesting.
+    Yields progress updates for Gradio as dicts:
+      {"msg": "...", "file": "name.pdf", "i": current_step, "n": total_steps}
+    UI shows a progress bar from i/n and the current file being processed.
     """
     raw_dir = Path(raw_dir)
-    yield "🔎 Checking documents and embedding version..."
+    yield {"msg": "Checking documents and embedding version…", "file": "", "i": 0, "n": 1}
 
+    # Plan work
     changed, plan = check_and_ingest_if_needed(raw_dir, collection_name)
+
+    # Full rebuild path
     if plan.get("full_rebuild"):
-        yield "⚠️ Embedding model changed → full rebuild."
-        # Full rebuild: wipe and ingest all
         if Path(settings.chroma_path).exists():
-            yield "🧹 Clearing vector store..."
+            yield {"msg": "Embedding changed → clearing vector store…", "file": "", "i": 0, "n": 1}
             shutil.rmtree(settings.chroma_path, ignore_errors=True)
 
-        vs = _vectordb(collection_name)
         files = sorted([p for p in raw_dir.glob("*.pdf") if p.is_file()])
         if not files:
-            yield "ℹ️ No PDFs found in data/raw_pdfs."
             _write_manifest({"embedding_id": settings.embedding_id, "updated": _utc_now(), "files": {}})
+            yield {"msg": "No PDFs found in data/raw_pdfs.", "file": "", "i": 1, "n": 1}
             return
-        yield f"📥 Ingesting {len(files)} PDFs..."
-        counts = _ingest_files(vs, files)
+
+        vs = _vectordb(collection_name)
+        splitter = _splitter()
+        counts: Dict[str, int] = {}
+
+        n = len(files)
+        for i, pdf in enumerate(files, start=1):
+            yield {"msg": "Indexing", "file": pdf.name, "i": i, "n": n}
+            # ingest this single file
+            docs = _load_docs_for_file(pdf)
+            docs = splitter.split_documents(docs)
+            if docs:
+                vs.add_documents(docs)
+                counts[pdf.name] = len(docs)
+            else:
+                counts[pdf.name] = 0
+
+        # Write fresh manifest
         manifest = {"embedding_id": settings.embedding_id, "updated": _utc_now(), "files": {}}
         for p in files:
-            manifest["files"][p.name] = {"sha256": _file_sha256(p), "chunks": counts.get(p.name, 0), "last_ingested": _utc_now()}
+            manifest["files"][p.name] = {
+                "sha256": _file_sha256(p),
+                "chunks": counts.get(p.name, 0),
+                "last_ingested": _utc_now(),
+            }
         _write_manifest(manifest)
-        yield "✅ Rebuild complete."
+        yield {"msg": "Rebuild complete.", "file": "", "i": n, "n": n}
         return
 
-    # Incremental plan
-    removed = plan.get("removed", [])
-    added = plan.get("added", [])
-    changed_files = plan.get("changed", [])
-    kept = plan.get("kept", [])
+    # Incremental path
+    removed = plan.get("removed", []) or []
+    added = plan.get("added", []) or []
+    changed_files = plan.get("changed", []) or []
+    kept = plan.get("kept", []) or []
 
-    if not changed and not (removed or added or changed_files):
-        yield "✅ All documents are up to date."
+    # Nothing to do
+    if not (removed or added or changed_files):
+        yield {"msg": "All documents are up to date.", "file": "", "i": 1, "n": 1}
         return
+
+    prev_manifest = _read_manifest()
+    prev_files = prev_manifest.get("files", {}) if isinstance(prev_manifest, dict) else {}
 
     vs = _vectordb(collection_name)
+    splitter = _splitter()
 
+    ops_total = len(removed) + len(added) + len(changed_files)
+    step = 0
+
+    # 1) Remove deleted/changed
     if removed:
-        yield f"🗑️ Removing {len(removed)} PDFs from index..."
-        for n in removed:
-            _delete_file_from_vs(vs, n)
+        for name in removed:
+            step += 1
+            yield {"msg": "Removing from index", "file": name, "i": step, "n": ops_total}
+            _delete_file_from_vs(vs, name)
+    if changed_files:
+        for name in changed_files:
+            step += 1
+            yield {"msg": "Removing outdated chunks", "file": name, "i": step, "n": ops_total}
+            _delete_file_from_vs(vs, name)
 
-    todo = added + changed_files
-    if todo:
-        yield f"📥 Ingesting {len(todo)} PDFs..."
-        files = [raw_dir / n for n in todo]
-        _ingest_files(vs, files)
+    # 2) Ingest added + changed
+    added_counts: Dict[str, int] = {}
+    for name in added + changed_files:
+        step += 1
+        pdf = raw_dir / name
+        yield {"msg": "Indexing", "file": name, "i": step, "n": ops_total}
+        if not pdf.exists():
+            # Skip if missing
+            continue
+        docs = _load_docs_for_file(pdf)
+        docs = splitter.split_documents(docs)
+        if docs:
+            vs.add_documents(docs)
+            added_counts[name] = len(docs)
+        else:
+            added_counts[name] = 0
 
-    # Write new manifest
-    manifest = run_ingest_plan(raw_dir, plan, collection_name)
-    yield f"✅ Index updated. {len(manifest.get('files', {}))} files tracked."
+    # 3) Write new manifest (kept + newly ingested; removed are omitted)
+    manifest = {"embedding_id": settings.embedding_id, "updated": _utc_now(), "files": {}}
+    # current files in dir (after removals)
+    current_files = sorted([p for p in raw_dir.glob("*.pdf") if p.is_file()])
+    current_names = [p.name for p in current_files]
+    for p in current_files:
+        name = p.name
+        if name in added_counts:  # newly added/changed
+            manifest["files"][name] = {
+                "sha256": _file_sha256(p),
+                "chunks": added_counts.get(name, 0),
+                "last_ingested": _utc_now(),
+            }
+        elif name in kept:
+            prev = prev_files.get(name, {})
+            manifest["files"][name] = {
+                "sha256": _file_sha256(p),  # refresh hash in case it silently changed
+                "chunks": prev.get("chunks"),
+                "last_ingested": prev.get("last_ingested", _utc_now()),
+            }
+        else:
+            # If a file is present but not in any bucket (edge case), treat as kept
+            prev = prev_files.get(name, {})
+            manifest["files"][name] = {
+                "sha256": _file_sha256(p),
+                "chunks": prev.get("chunks"),
+                "last_ingested": prev.get("last_ingested", _utc_now()),
+            }
+
+    _write_manifest(manifest)
+    yield {"msg": f"Index updated. {len(current_names)} files tracked.", "file": "", "i": ops_total, "n": ops_total or 1}
+
 
 # ---------- Document management helpers ----------
 

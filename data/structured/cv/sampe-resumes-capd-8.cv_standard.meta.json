@@ -3,8 +3,8 @@
   "schema": "cv_standard",
   "used_ocr": false,
   "text_len": 3205,
-  "pages": 1,
-  "is_cv": true,
-  "detector_score": 0.9075,
+  "pages": null,
+  "is_cv": null,
+  "detector_score": null,
   "raw_file": "sampe-resumes-capd-8.cv_standard.raw.json"
 }
