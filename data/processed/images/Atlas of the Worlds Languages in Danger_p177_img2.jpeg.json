@@ -1,0 +1,17 @@
+{
+  "image_id": "Atlas of the Worlds Languages in Danger_p177_img2.jpeg",
+  "image_path": "data\\processed\\images\\Atlas of the Worlds Languages in Danger_p177_img2.jpeg",
+  "file_name": "Atlas of the Worlds Languages in Danger_p177_img2.jpeg",
+  "source_pdf": "Atlas of the Worlds Languages in Danger.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Atlas of the Worlds Languages in Danger.pdf",
+  "page": 177,
+  "bytes": 62170,
+  "width": 1405,
+  "height": 973,
+  "caption": "arafed view of a white wall with a black background",
+  "description": "A serene, white wall is depicted in the arafed view, with a stark black background that contrasts sharply to create visual interest. The wall appears to be smooth and polished, with no imperfections or texture. A few small, circular objects are placed on the surface, their placement suggesting intentional design. The space between the objects and the wall shows a clear spatial hierarchy, with the objects occupying a relatively smaller area. The overall atmosphere is calm and focused, emphasizing the harmony between the white wall and the black backdrop.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:07:11Z"
+}

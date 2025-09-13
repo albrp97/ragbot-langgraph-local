@@ -1,0 +1,17 @@
+{
+  "image_id": "Making It Modern_p41_img1.jpeg",
+  "image_path": "data\\processed\\images\\Making It Modern_p41_img1.jpeg",
+  "file_name": "Making It Modern_p41_img1.jpeg",
+  "source_pdf": "Making It Modern.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Making It Modern.pdf",
+  "page": 41,
+  "bytes": 49658,
+  "width": 741,
+  "height": 322,
+  "caption": "a drawing of a painting of flowers and grass in a field",
+  "description": "A detailed, strictly factual 3-6 sentence description of the short caption \"a drawing of a painting of flowers and grass in a field\" would be:\n\nThe painting depicts vibrant flowers and lush grass interwoven with the landscape, creating a serene visual scene. The colors are warm and soft, with green fields dominated by blooming flowers. A gentle breeze rustles through the grass, adding movement to the composition. The field is open, with clear visibility of the surrounding environment. The drawing captures the dynamic balance between nature and the viewer’s eye. The scene shows the interplay between the flora and the natural setting, emphasizing the beauty of the botanical scene.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:08:49Z"
+}

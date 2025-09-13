@@ -4,7 +4,6 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     model_id: str = Field(default="Qwen/Qwen3-0.6B", alias="MODEL_ID")
     embedding_id: str = Field(default="Qwen/Qwen3-Embedding-0.6B", alias="EMBEDDING_ID")
-    image_embedding_id: str = Field(default="laion/CLIP-ViT-L-14-laion2B-s32B-b82K", alias="IMAGE_EMBEDDING_ID")
 
     chroma_path: str = Field(default="./data/chroma", alias="CHROMA_PATH")
 
@@ -32,6 +31,11 @@ class Settings(BaseSettings):
 
     # ---- Retrieval knobs ----
     retriever_k: int = Field(default=5, alias="RETRIEVER_K")
+    
+    # ---- Image captions (VLM) ----
+    image_retrieval_id: str = Field(default="Salesforce/blip-image-captioning-large", alias="IMAGE_RETRIEVAL_ID")
+    images_dir: str = Field(default="./data/processed/images", alias="IMAGES_DIR")
+
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", case_sensitive=False)
 

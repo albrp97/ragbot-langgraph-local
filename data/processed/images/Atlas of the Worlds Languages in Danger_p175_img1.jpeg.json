@@ -1,0 +1,17 @@
+{
+  "image_id": "Atlas of the Worlds Languages in Danger_p175_img1.jpeg",
+  "image_path": "data\\processed\\images\\Atlas of the Worlds Languages in Danger_p175_img1.jpeg",
+  "file_name": "Atlas of the Worlds Languages in Danger_p175_img1.jpeg",
+  "source_pdf": "Atlas of the Worlds Languages in Danger.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Atlas of the Worlds Languages in Danger.pdf",
+  "page": 175,
+  "bytes": 57373,
+  "width": 1276,
+  "height": 967,
+  "caption": "there is a black and white photo of a snowboarder in mid air",
+  "description": "A black and white photo captures a snowboarder in motion, with the camera lens capturing a clear view of their body and equipment as they glide gracefully through the air. The scene features a warm, golden light filtering through the background, casting soft shadows that add to the dramatic effect. The snowboarder appears poised and focused, with their body streamlined and their gear properly adjusted. The color palette includes white, which contrasts sharply with the snowy environment, while the overall tone is serene and exhilarating. The space between the snowboarder and the horizon is filled with an almost mystical quality, emphasizing the beauty and challenge of the sport. The action is fluid and natural, showing the rider’s skill and control in a breathtaking moment.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:07:08Z"
+}

@@ -1,0 +1,17 @@
+{
+  "image_id": "Atlas of the Worlds Languages in Danger_p169_img2.jpeg",
+  "image_path": "data\\processed\\images\\Atlas of the Worlds Languages in Danger_p169_img2.jpeg",
+  "file_name": "Atlas of the Worlds Languages in Danger_p169_img2.jpeg",
+  "source_pdf": "Atlas of the Worlds Languages in Danger.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Atlas of the Worlds Languages in Danger.pdf",
+  "page": 169,
+  "bytes": 76853,
+  "width": 1401,
+  "height": 973,
+  "caption": "arafed image of a black and white map of the united states",
+  "description": "A black and white map of the United States is depicted with precise lines and symbols, showcasing a clear representation of the country's geography. The map features distinct landmarks such as the Great Wall of China, the Statue of Liberty, and the Lincoln Memorial, all aligned spatially to form a coherent image. The colors are absent, relying solely on shades of gray and white to convey the scene. A single white dot is placed at the top of the map to indicate the U.S. flag, while a black border outlines the entire map. The layout is structured in a way that allows for easy navigation and understanding of the country's borders. No visual elements are included beyond the map itself.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:06:55Z"
+}

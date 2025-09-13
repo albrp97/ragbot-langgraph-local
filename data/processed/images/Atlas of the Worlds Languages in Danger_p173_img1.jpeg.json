@@ -1,0 +1,17 @@
+{
+  "image_id": "Atlas of the Worlds Languages in Danger_p173_img1.jpeg",
+  "image_path": "data\\processed\\images\\Atlas of the Worlds Languages in Danger_p173_img1.jpeg",
+  "file_name": "Atlas of the Worlds Languages in Danger_p173_img1.jpeg",
+  "source_pdf": "Atlas of the Worlds Languages in Danger.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Atlas of the Worlds Languages in Danger.pdf",
+  "page": 173,
+  "bytes": 46766,
+  "width": 1401,
+  "height": 973,
+  "caption": "araffes in the snow with a snowboard on a snowy surface",
+  "description": "A scene of araffes (a type of snowman) sitting on a snowy surface, with a snowboard on the ground. The araffes are made of white snow, and there's a red snowboard attached to their body. The snowboard is positioned in a way that allows for movement, creating a dynamic visual effect. The snowboard's surface is covered in white snow, adding to the serene atmosphere. The araffes are clearly visible, their design indicating a snowman formation, and their position suggests they are both stationary and in motion together. The scene captures the contrast between the araffes' soft white appearance and the snowboard's sleek, modern design.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:07:03Z"
+}

@@ -1,0 +1,17 @@
+{
+  "image_id": "Atlas of the Worlds Languages in Danger_p215_img1.jpeg",
+  "image_path": "data\\processed\\images\\Atlas of the Worlds Languages in Danger_p215_img1.jpeg",
+  "file_name": "Atlas of the Worlds Languages in Danger_p215_img1.jpeg",
+  "source_pdf": "Atlas of the Worlds Languages in Danger.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Atlas of the Worlds Languages in Danger.pdf",
+  "page": 215,
+  "bytes": 42219,
+  "width": 1401,
+  "height": 970,
+  "caption": "arafed map of australia with a black background and white outline",
+  "description": "The Arafid Map of Australia features a black, high-contrast background with a white outline that clearly defines the country's borders. The map includes detailed geographical markers such as national parks, cities, and landmarks, all presented in a clear and organized layout. The color palette uses black and white for readability, while the map emphasizes key features through bold outlines. The layout ensures that spatial relationships between regions are visible, and the text is positioned to provide context without distortion. The map reflects the country’s natural and cultural heritage, showcasing its diverse landscapes and communities in a precise and factual manner.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:07:36Z"
+}

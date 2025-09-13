@@ -1,0 +1,17 @@
+{
+  "image_id": "man-walking-in-the-desert-paolo-negri_p3_img1.jpeg",
+  "image_path": "data\\processed\\images\\man-walking-in-the-desert-paolo-negri_p3_img1.jpeg",
+  "file_name": "man-walking-in-the-desert-paolo-negri_p3_img1.jpeg",
+  "source_pdf": "man-walking-in-the-desert-paolo-negri.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\man-walking-in-the-desert-paolo-negri.pdf",
+  "page": 3,
+  "bytes": 126779,
+  "width": 1000,
+  "height": 739,
+  "caption": "a map of the world with countries and their names",
+  "description": "A map of the world is a visual representation of all nations, marked with their respective countries and names in various colors. The map includes prominent geographical features such as mountains, oceans, and continents, arranged in a logical order to show the global distribution of land and sea. Countries are depicted in different shades of green, blue, red, and yellow to represent their colors, while cities and landmarks are outlined in distinct hues for clarity. The layout follows a logical structure, ensuring that each country's name is clearly visible and aligned with its position on the map. The text on the map includes the country names and key geographical elements, making it an informative and visually appealing tool for understanding the world.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:09:19Z"
+}

@@ -1,0 +1,17 @@
+{
+  "image_id": "man-walking-in-the-desert-paolo-negri_p2_img1.jpeg",
+  "image_path": "data\\processed\\images\\man-walking-in-the-desert-paolo-negri_p2_img1.jpeg",
+  "file_name": "man-walking-in-the-desert-paolo-negri_p2_img1.jpeg",
+  "source_pdf": "man-walking-in-the-desert-paolo-negri.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\man-walking-in-the-desert-paolo-negri.pdf",
+  "page": 2,
+  "bytes": 110134,
+  "width": 1240,
+  "height": 826,
+  "caption": "arafed man walking down a path in the woods",
+  "description": "A man in a red shirt is walking down a winding wooden path through the dense underbrush of the forest. The sun filters through the trees, casting golden light across his face as he moves slowly, his movements deliberate. A small group of animals, including a fox, appears at the edge of the path, watching him with cautious curiosity. The air is cool and crisp, the trees provide shade, and the path leads to a clearing where a fire is lit by the man’s hand. The scene is peaceful, filled with natural beauty and quiet life.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:09:15Z"
+}

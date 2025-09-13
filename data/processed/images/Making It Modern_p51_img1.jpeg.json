@@ -1,0 +1,17 @@
+{
+  "image_id": "Making It Modern_p51_img1.jpeg",
+  "image_path": "data\\processed\\images\\Making It Modern_p51_img1.jpeg",
+  "file_name": "Making It Modern_p51_img1.jpeg",
+  "source_pdf": "Making It Modern.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Making It Modern.pdf",
+  "page": 51,
+  "bytes": 42026,
+  "width": 854,
+  "height": 1104,
+  "caption": "purple vase with a blue band around the rim",
+  "description": "A purple vase is displayed with a blue band surrounding its rim, creating a visually striking contrast. The vase itself appears elegant and refined, with smooth curves that suggest both form and functionality. The blue band adds a decorative element, while the color palette of purple and blue complements the vase’s aesthetic appeal. The vase is positioned centrally on a table, providing a sense of balance and harmony. A small object, perhaps a candle or a flower, is placed nearby to enhance the scene. The vase’s design is both functional and artistic, with the blue band adding a unique touch to its appearance.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:09:01Z"
+}

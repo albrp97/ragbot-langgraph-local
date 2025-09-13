@@ -43,34 +43,43 @@ def _bar_html(i: int, n: int) -> str:
 
 # ---------- Load (stream re-indexing with progress, then enable input) ----------
 def on_load():
-    """
-    On app load, (re)ingest PDFs if needed and stream progress lines while keeping controls locked.
-    After finishing, populate the checkbox with ALL + files, and enable the textbox.
-    """
     raw_dir = Path("data/raw_pdfs")
 
-    # Stream progress: keep controls locked during ingestion
     for upd in check_and_ingest_stream(raw_dir):
-        # Support both: dict progress ({msg, file, i, n}) or plain str lines
         if isinstance(upd, dict):
             msg = upd.get("msg", "")
             cur_file = upd.get("file") or ""
-            i = upd.get("i", 0)
-            n = upd.get("n", 1)
-            bar = _bar_html(i, n)
-            file_line = f"**Ingesting:** `{cur_file}` ({i}/{n})" if cur_file else f"({i}/{n})"
+            i = int(upd.get("i", 0))
+            n = int(upd.get("n", 1))
+            pdf_bar = _bar_html(i, max(n, 1))
+            pdf_line = f"**Indexing PDF:** `{cur_file}` ({i}/{n})" if cur_file else f"({i}/{n})"
+
+            # Default: keep image bar unchanged unless phase == images
+            img_bar_upd = gr.update()
+            img_line_upd = gr.update()
+
+            if upd.get("phase") == "images":
+                img_i = int(upd.get("img_i", 0))
+                img_n = max(1, int(upd.get("img_n", 1)))
+                img_bar_upd = gr.update(value=_bar_html(img_i, img_n), visible=True)
+                cap = upd.get("caption", "")
+                img_name = upd.get("image", "")
+                img_line = f"**Extracting images:** `{img_name}` ({img_i}/{img_n})\n\n{cap}" if img_name else f"({img_i}/{img_n})\n\n{cap}"
+                img_line_upd = gr.update(value=img_line, visible=True)
+
             yield (
-                gr.update(value=f"🔄 {msg}"),        # status
-                gr.update(interactive=False),        # txt
-                gr.update(interactive=False),        # checkbox
-                gr.update(interactive=False),        # manage button
-                [],                                  # selected_state
-                [],                                  # files_state
-                gr.update(value=bar, visible=True),  # ingest progress bar
-                gr.update(value=file_line, visible=True),  # ingest current file
+                gr.update(value=f"🔄 {msg}" if msg else f"🔄 Working…"),  # status
+                gr.update(interactive=False),                             # txt
+                gr.update(interactive=False),                             # checkbox
+                gr.update(interactive=False),                             # manage button
+                [],                                                      # selected_state
+                [],                                                      # files_state
+                gr.update(value=pdf_bar, visible=True),                  # ingest_bar (PDF)
+                gr.update(value=pdf_line, visible=True),                 # ingest_file label
+                img_bar_upd,                                             # image_bar
+                img_line_upd,                                            # image_file label
             )
         else:
-            # Fallback for string-only updates
             yield (
                 gr.update(value=str(upd)),
                 gr.update(interactive=False),
@@ -78,19 +87,16 @@ def on_load():
                 gr.update(interactive=False),
                 [],
                 [],
-                gr.update(),   # leave bar as-is
-                gr.update(),   # leave file label as-is
+                gr.update(), gr.update(), gr.update(), gr.update(),
             )
 
     # Ready → populate checkbox with ALL + current files and enable typing
     files = list_tracked_files()
     choices = ["ALL"] + files
     visible_val = ["ALL"] + files
-
-    selected_state = files[:]   # filenames only (no 'ALL' in state)
+    selected_state = files[:]
     files_state = files[:]
 
-    # Set bar to 100% and freeze
     bar_done = _bar_html(1, 1)
     final_file_line = "Done."
 
@@ -103,7 +109,10 @@ def on_load():
         files_state,
         gr.update(value=bar_done, visible=True),
         gr.update(value=final_file_line, visible=True),
+        gr.update(value=bar_done, visible=True),         # image bar done
+        gr.update(value="Done.", visible=True),          # image label done
     )
+
 
 
 # ---------- Manager helpers ----------
@@ -123,67 +132,72 @@ def toggle_manager(current_visible):
 
 # Streaming upload + re-index with progress
 def do_upload_stream(files):
-    """
-    Save uploaded PDFs, stream re-index progress, then reset selection to ALL and enable typing.
-    Yields updates so progress bar and current file are live during ingestion.
-    """
     if not files:
-        # No changes
-        yield gr.update(), gr.update(), gr.update(), [], [], gr.update(), gr.update(), gr.update()
+        yield gr.update(), gr.update(), gr.update(), [], [], gr.update(), gr.update(), gr.update(), gr.update(), gr.update()
         return
 
-    # Save temp files to data/raw_pdfs
     tmp_paths = [f.name if hasattr(f, "name") else str(f) for f in files]
     _ = save_uploaded_pdfs(tmp_paths)
 
     raw_dir = Path("data/raw_pdfs")
-
-    # Stream re-index
     msgs = []
     for upd in check_and_ingest_stream(raw_dir):
         if isinstance(upd, dict):
             msg = upd.get("msg", "")
             cur_file = upd.get("file") or ""
-            i = upd.get("i", 0)
-            n = upd.get("n", 1)
-            bar = _bar_html(i, n)
-            file_line = f"**Ingesting:** `{cur_file}` ({i}/{n})" if cur_file else f"({i}/{n})"
+            i = int(upd.get("i", 0))
+            n = int(upd.get("n", 1))
+            pdf_bar = _bar_html(i, max(n, 1))
+            pdf_line = f"**Indexing PDF:** `{cur_file}` ({i}/{n})" if cur_file else f"({i}/{n})"
             msgs.append(msg)
-            # Partial updates: status, list (unchanged yet), checkbox (unchanged), files_state (unchanged),
-            # selected_state (unchanged), txt (disabled), bar, file label
+
+            img_bar_upd = gr.update()
+            img_line_upd = gr.update()
+            if upd.get("phase") == "images":
+                img_i = int(upd.get("img_i", 0))
+                img_n = max(1, int(upd.get("img_n", 1)))
+                img_bar_upd = gr.update(value=_bar_html(img_i, img_n), visible=True)
+                cap = upd.get("caption", "")
+                img_name = upd.get("image", "")
+                img_line = f"**Extracting images:** `{img_name}` ({img_i}/{img_n})\n\n{cap}" if img_name else f"({img_i}/{img_n})\n\n{cap}"
+                img_line_upd = gr.update(value=img_line, visible=True)
+
             yield (
-                gr.update(value=f"🔄 {msg}"),
+                gr.update(value=f"🔄 {msg}" if msg else "🔄 Working…"),
                 gr.update(), gr.update(), [], [], gr.update(interactive=False),
-                gr.update(value=bar, visible=True),
-                gr.update(value=file_line, visible=True),
+                gr.update(value=pdf_bar, visible=True),
+                gr.update(value=pdf_line, visible=True),
+                img_bar_upd,
+                img_line_upd,
             )
         else:
             msgs.append(str(upd))
             yield (
                 gr.update(value=f"🔄 {upd}"),
                 gr.update(), gr.update(), [], [], gr.update(interactive=False),
-                gr.update(), gr.update(),
+                gr.update(), gr.update(), gr.update(), gr.update(),
             )
 
-    # After indexing, refresh lists & defaults
     files_now = list_tracked_files()
     choices = ["ALL"] + files_now
     visible_val = ["ALL"] + files_now
     list_text = "### Loaded PDFs\n" + ("\n".join(f"- {f}" for f in files_now) if files_now else "_No PDFs found_")
-    status_msg = ("\n".join(msgs) + "\n✅ Upload + indexing complete.") if msgs else "✅ Upload + indexing complete."
+    status_msg = ("\n".join(m for m in msgs if m) + "\n✅ Upload + indexing complete.") if msgs else "✅ Upload + indexing complete."
     bar_done = _bar_html(1, 1)
 
-    # Final state: defaults to ALL, enable textbox, bar 100%
     yield (
         gr.update(value=status_msg),
         gr.update(value=list_text),
         gr.update(choices=choices, value=visible_val),
-        files_now,              # files_state
-        files_now,              # selected_state (filenames)
-        gr.update(interactive=True),  # txt enable
+        files_now,
+        files_now,
+        gr.update(interactive=True),
+        gr.update(value=bar_done, visible=True),
+        gr.update(value="Done.", visible=True),
         gr.update(value=bar_done, visible=True),
         gr.update(value="Done.", visible=True),
     )
+
 
 
 # ---------- ALL logic with previous state ----------
@@ -285,9 +299,14 @@ def build_app():
 
         status = gr.Markdown("⏳ Preparing...", elem_id="status")
 
-        # NEW: Ingestion progress bar + current file
+        # Ingestion progress bar + current file
         ingest_bar = gr.HTML(_bar_html(0, 100), visible=True)
         ingest_file = gr.Markdown("", visible=True)
+        
+        # Image extraction progress bar + current image/caption
+        image_bar = gr.HTML(_bar_html(0, 1), visible=True)
+        image_file = gr.Markdown("", visible=True)
+
 
         # Selection row (always visible)
         select_all_and_files = gr.CheckboxGroup(
@@ -325,9 +344,11 @@ def build_app():
             fn=on_load,
             outputs=[
                 status, txt, select_all_and_files, manage_toggle,
-                selected_state, files_state, ingest_bar, ingest_file
+                selected_state, files_state, ingest_bar, ingest_file,
+                image_bar, image_file, 
             ],
         )
+
 
         # Toggle manager visibility
         manage_toggle.click(
@@ -372,8 +393,10 @@ def build_app():
         upload.upload(
             fn=do_upload_stream,
             inputs=[upload],
-            outputs=[status, pdf_list, select_all_and_files, files_state, selected_state, txt, ingest_bar, ingest_file],
+            outputs=[status, pdf_list, select_all_and_files, files_state, selected_state, txt,
+                    ingest_bar, ingest_file, image_bar, image_file],
         )
+
 
         # Enter to submit (no Send button) — block when no selection
         def on_submit(user_msg, history, selected_files):

@@ -1,0 +1,17 @@
+{
+  "image_id": "Atlas of the Worlds Languages in Danger_p167_img2.jpeg",
+  "image_path": "data\\processed\\images\\Atlas of the Worlds Languages in Danger_p167_img2.jpeg",
+  "file_name": "Atlas of the Worlds Languages in Danger_p167_img2.jpeg",
+  "source_pdf": "Atlas of the Worlds Languages in Danger.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Atlas of the Worlds Languages in Danger.pdf",
+  "page": 167,
+  "bytes": 44087,
+  "width": 1055,
+  "height": 698,
+  "caption": "arafed map of the united states with a black background",
+  "description": "The Arafed Map of the United States is a detailed, historically accurate depiction of the country's geography with a black background. It features a clear representation of landmasses, rivers, mountains, and cities, all presented in a structured and precise manner. The map includes key landmarks such as Washington D.C., the Great Lakes region, and major cities like New York and Boston. The layout emphasizes spatial relationships, showing how these regions connect through roads, trails, and natural boundaries. The design incorporates a variety of colors—such as earth tones for forests and water bodies, warm hues for cities and landmarks, and cool shades for mountains and skies—to create an immersive visual experience. The map is divided into sections, each representing different geographical zones, and includes annotations that clarify specific features like elevation changes or route directions. The overall composition balances detail with readability, making it an essential reference for both geography enthusiasts and travelers.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:06:51Z"
+}

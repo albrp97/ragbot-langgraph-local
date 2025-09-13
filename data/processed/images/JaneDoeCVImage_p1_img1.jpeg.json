@@ -1,0 +1,17 @@
+{
+  "image_id": "JaneDoeCVImage_p1_img1.jpeg",
+  "image_path": "data\\processed\\images\\JaneDoeCVImage_p1_img1.jpeg",
+  "file_name": "JaneDoeCVImage_p1_img1.jpeg",
+  "source_pdf": "JaneDoeCVImage.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\JaneDoeCVImage.pdf",
+  "page": 1,
+  "bytes": 144732,
+  "width": 828,
+  "height": 1091,
+  "caption": "a close up of a resume for a job on a computer",
+  "description": "A close-up of a resume for a job on a computer displays a clean, modern layout with a professional design. The resume includes key sections such as contact information, professional summary, and skills. The background features a soft blue and white color scheme, creating a sleek and professional look. A small image of a person is shown in the center, adding to the visual appeal. The computer itself has a clean, modern interface, with buttons and navigation elements clearly visible. The scene is set in a quiet, office environment, emphasizing the importance of a well-designed resume.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:15:47Z"
+}

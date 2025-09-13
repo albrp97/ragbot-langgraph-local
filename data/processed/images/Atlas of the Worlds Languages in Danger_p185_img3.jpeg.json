@@ -1,0 +1,17 @@
+{
+  "image_id": "Atlas of the Worlds Languages in Danger_p185_img3.jpeg",
+  "image_path": "data\\processed\\images\\Atlas of the Worlds Languages in Danger_p185_img3.jpeg",
+  "file_name": "Atlas of the Worlds Languages in Danger_p185_img3.jpeg",
+  "source_pdf": "Atlas of the Worlds Languages in Danger.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Atlas of the Worlds Languages in Danger.pdf",
+  "page": 185,
+  "bytes": 77590,
+  "width": 1402,
+  "height": 973,
+  "caption": "arafed view of a black and white map of the area",
+  "description": "A black and white map of the area, with clear lines and symbols, reveals a structured layout of land use and infrastructure. The map features a consistent color scheme, with primary colors like blue and green dominating the visual elements. Aerial views provide a clear perspective, highlighting key geographical features such as rivers, mountains, and towns. The terrain appears to be flat or elevated, with visible landmarks and natural features. The map includes markers for major roads, buildings, and natural points, offering a comprehensive overview of the region's geography. This description captures the essence of the original caption while adhering to strict factual standards.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:07:17Z"
+}

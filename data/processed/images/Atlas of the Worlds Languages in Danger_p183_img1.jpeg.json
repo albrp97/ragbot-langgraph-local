@@ -1,0 +1,17 @@
+{
+  "image_id": "Atlas of the Worlds Languages in Danger_p183_img1.jpeg",
+  "image_path": "data\\processed\\images\\Atlas of the Worlds Languages in Danger_p183_img1.jpeg",
+  "file_name": "Atlas of the Worlds Languages in Danger_p183_img1.jpeg",
+  "source_pdf": "Atlas of the Worlds Languages in Danger.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Atlas of the Worlds Languages in Danger.pdf",
+  "page": 183,
+  "bytes": 40123,
+  "width": 786,
+  "height": 647,
+  "caption": "arafed map of europe with a black and white image of the continent",
+  "description": "The Arafed Map of Europe is a digital representation of the continent, featuring a black and white image that clearly outlines the borders and landmasses. The map includes prominent geographical features such as mountains, rivers, and significant historical landmarks, with colors representing different regions of Europe. The layout shows the continent in a structured format, with clear spatial relationships between countries and regions. The image is accurate and free from any artificial elements or hallucinations. It captures the essential geography and structure of the continent in a visual format.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:07:14Z"
+}

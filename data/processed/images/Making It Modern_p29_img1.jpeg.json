@@ -1,0 +1,17 @@
+{
+  "image_id": "Making It Modern_p29_img1.jpeg",
+  "image_path": "data\\processed\\images\\Making It Modern_p29_img1.jpeg",
+  "file_name": "Making It Modern_p29_img1.jpeg",
+  "source_pdf": "Making It Modern.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Making It Modern.pdf",
+  "page": 29,
+  "bytes": 41822,
+  "width": 791,
+  "height": 947,
+  "caption": "there are two vases that are sitting side by side",
+  "description": "There are two vases placed side by side on a wooden table, one with a red ceramic handle and the other featuring a blue glass body, their surfaces matching the color of the surrounding furniture. The vases are arranged in a straight line, creating a visually balanced composition. One vase contains a cup filled with water, while the other holds a small glass jar of juice, demonstrating distinct functional elements. The arrangement is clear, with no overlapping or confusing details, maintaining a straightforward and accurate depiction of the scene.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:08:30Z"
+}

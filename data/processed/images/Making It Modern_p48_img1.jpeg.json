@@ -1,0 +1,17 @@
+{
+  "image_id": "Making It Modern_p48_img1.jpeg",
+  "image_path": "data\\processed\\images\\Making It Modern_p48_img1.jpeg",
+  "file_name": "Making It Modern_p48_img1.jpeg",
+  "source_pdf": "Making It Modern.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Making It Modern.pdf",
+  "page": 48,
+  "bytes": 101947,
+  "width": 854,
+  "height": 1104,
+  "caption": "there is a blue and white plate with a fish on it",
+  "description": "There is a blue and white plate with a fish on it, its surface displaying a harmonious blend of colors that create a visually appealing design. The plate features a rectangular shape, with the fish positioned centrally on top, casting a gentle shadow across the surface. A simple wooden frame surrounds the plate, adding to its rustic charm. The fish appears to be in good condition, its body showing no signs of damage. The colors are consistent with traditional Japanese aesthetics, emphasizing both simplicity and elegance. The presence of the fish adds a touch of whimsy to the overall scene, while the plate’s arrangement creates a focal point that invites observation.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:08:58Z"
+}

@@ -1,0 +1,17 @@
+{
+  "image_id": "Making It Modern_p10_img1.jpeg",
+  "image_path": "data\\processed\\images\\Making It Modern_p10_img1.jpeg",
+  "file_name": "Making It Modern_p10_img1.jpeg",
+  "source_pdf": "Making It Modern.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Making It Modern.pdf",
+  "page": 10,
+  "bytes": 42317,
+  "width": 741,
+  "height": 944,
+  "caption": "three vases are sitting next to each other on a gray surface",
+  "description": "Three vases are arranged side by side on a gray, smooth surface. The vases are white in color, each with a round base and a tall stem. They are positioned in a straight line, their surfaces touching the gray surface. A single, faint white flower is placed in one vase, its petals gently curling toward the center. The space between the vases is filled with soft, earthy tones, creating a harmonious visual contrast. The action of the flowers causing slight vibrations is visible as they sway slightly.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:08:09Z"
+}

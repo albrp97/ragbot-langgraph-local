@@ -1,0 +1,17 @@
+{
+  "image_id": "Atlas of the Worlds Languages in Danger_p165_img681.jpeg",
+  "image_path": "data\\processed\\images\\Atlas of the Worlds Languages in Danger_p165_img681.jpeg",
+  "file_name": "Atlas of the Worlds Languages in Danger_p165_img681.jpeg",
+  "source_pdf": "Atlas of the Worlds Languages in Danger.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Atlas of the Worlds Languages in Danger.pdf",
+  "page": 165,
+  "bytes": 73952,
+  "width": 1171,
+  "height": 907,
+  "caption": "a close up of a black and white photo of a snow covered area",
+  "description": "A close-up of a black and white photo captures a serene, snowy landscape with a soft glow from the light filtering through the trees. The scene features a dark blue sky, snow-covered fields, and a lone silhouette of a person standing on a small hill. The color palette is predominantly black and white, with subtle variations in lighting that create a warm, inviting atmosphere. Objects like a snowman, a frozen lake, and a wind-swept path are visible. The space is filled with a sense of stillness, with the horizon marked by a faint line of light. The action is minimal, focusing on the natural elements of the scene without any added human figures or movements.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:06:46Z"
+}

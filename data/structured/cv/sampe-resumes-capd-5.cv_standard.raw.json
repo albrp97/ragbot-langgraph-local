@@ -1,0 +1,98 @@
+{
+  "file_name": "DesignResumeSample",
+  "pages": 1,
+  "is_cv": true,
+  "detector_score": 0.95,
+  "name": "Christie Lee",
+  "email": "clee@mit.edu",
+  "phone": "650 353 8566",
+  "location": "Cambridge, MA",
+  "websites": ["www.christie.com"],
+  "social_handles": ["clee.github.io", "clee.com"],
+  "objective": "To design and implement educational and architectural solutions that enhance community needs.",
+  "summary": "Christie Lee has gained experience in architecture and design, with a focus on creating effective solutions to community challenges.",
+  "education": [
+    {
+      "institution": "Massachusetts Institute of Technology",
+      "location": "Cambridge, MA",
+      "degree": "B.S.: Architecture.",
+      "year": "June 2016"
+    }
+  ],
+  "experience": [
+    {
+      "company": "New Valence Robotics",
+      "location": "Education Design Intern",
+      "start_date": "January 2016",
+      "end_date": null,
+      "description": "Designed interactive models with Rhino 3D concurrent with Common Core standards for the enhancement of education in local schools and wrote corresponding lesson plans."
+    },
+    {
+      "company": "Involution Studios",
+      "location": "Design Intern",
+      "start_date": "June 2015",
+      "end_date": null,
+      "description": "Researched, designed and co-wrote a manifesto with bioengineering Johns Hopkins student as a feature for the studio website using HTML/CSS with Bootstrap. Created data visualisations for the feature in D3."
+    },
+    {
+      "company": "Howeler + Yoon Architecture",
+      "location": "Design Intern",
+      "start_date": "June 2014",
+      "end_date": "August 2015",
+      "description": "Iterated designs and built prototypes of the Collier Memorial with Grasshopper for Rhino 3D to engineer the vaults and shape the masonry for structural stability on the MIT campus. Conducted geometry studies, physically with paper and digitally with Rhino 3D, for the Lawn on D swing installation in Boston."
+    }
+  ],
+  "projects": [
+    {
+      "title": "Back 'Bay Children’s Mediatheque",
+      "location": "Back Bay",
+      "description": "Conceptualized a children’s mediatheque based on field conditions across time. Collected real-time traffic data around the site and created data visualization rhythmic drawings."
+    },
+    {
+      "title": "Summer Street Fitness Center",
+      "location": "Summer Street",
+      "description": "Conceptualized a fitness center to direct viewpoints towards programs of interest. Experimented with the relationship of carving and packing programs to direct the visitor's focus towards the center of the space. Explored the effects of changing wall and ceiling geometries to create special vantage points in certain locations."
+    }
+  ],
+  "skills": [
+    "Rhino 3D",
+    "Autodesk Maya",
+    "AutoCAD",
+    "Adobe Illustrator",
+    "Adobe",
+    "Photoshop",
+    "Adobe InDesign",
+    "Adobe Premiere",
+    "HTML/CSS",
+    "Bootstrap",
+    "Grasshopper",
+    "Python",
+    "Processing"
+  ],
+  "flat_skills": [
+    "Rhino 3D",
+    "Autodesk Maya",
+    "AutoCAD",
+    "Adobe Illustrator",
+    "Adobe",
+    "Photoshop",
+    "Adobe InDesign",
+    "Adobe Premiere",
+    "HTML/CSS",
+    "Bootstrap",
+    "Grasshopper",
+    "Python",
+    "Processing"
+  ],
+  "certifications": ["Adobe Certified Professional"],
+  "awards": ["Grand Prize in Boston-wide art competition"],
+  "publications": ["Smithfield A, Doe J. Ethical Challenges in Enrolling Women in Research Studies. Journal of Medical Ethics, 2020."],
+  "languages": [
+    "English (fluent)",
+    "Spanish (intermediate)"
+  ],
+  "activities": [
+    "Back 'Bay Children’s Mediatheque",
+    "Summer Street Fitness Center"
+  ]
+}

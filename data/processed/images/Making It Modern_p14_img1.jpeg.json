@@ -1,0 +1,17 @@
+{
+  "image_id": "Making It Modern_p14_img1.jpeg",
+  "image_path": "data\\processed\\images\\Making It Modern_p14_img1.jpeg",
+  "file_name": "Making It Modern_p14_img1.jpeg",
+  "source_pdf": "Making It Modern.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Making It Modern.pdf",
+  "page": 14,
+  "bytes": 56949,
+  "width": 741,
+  "height": 739,
+  "caption": "there is a blue and white plate with a lizard on it",
+  "description": "There is a blue and white plate in the living room, displaying a small lizard on its surface. The plate has a soft blue hue, with white accents that add to its visual appeal. A tiny, curious lizard is sitting on the plate, its body covered in greenish-gray scales and eyes glowing faintly with curiosity. The space between the plate and the floor shows a narrow corridor leading to a window, where the light filters through the stained glass. As the person approaches, they notice the lizard’s tail flicks slightly, indicating movement and alertness. The scene is filled with natural elements and subtle interactions between the object and its surroundings.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:08:16Z"
+}

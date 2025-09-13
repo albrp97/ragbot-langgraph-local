@@ -1,0 +1,17 @@
+{
+  "image_id": "man-walking-in-the-desert-paolo-negri_p4_img1.jpeg",
+  "image_path": "data\\processed\\images\\man-walking-in-the-desert-paolo-negri_p4_img1.jpeg",
+  "file_name": "man-walking-in-the-desert-paolo-negri_p4_img1.jpeg",
+  "source_pdf": "man-walking-in-the-desert-paolo-negri.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\man-walking-in-the-desert-paolo-negri.pdf",
+  "page": 4,
+  "bytes": 84240,
+  "width": 1240,
+  "height": 1240,
+  "caption": "there is a vase with a dog head and a red bow tie",
+  "description": "There is a vase with a dog head, its body painted in shades of gray and white, and a red bow tie draped around the vase, catching the light as it stands in a warm, sunny room. The vase sits on a wooden table, creating a cozy atmosphere. A small dog, wagging its tail, watches from behind the vase. The bow tie adds a playful touch to the scene, while the vase’s surface reflects the sunlight gently. The colors used in both the vase and the bow tie are vibrant and consistent, highlighting the scene’s appeal. The spatial relations are clear: the dog is positioned near the vase, the bow tie is draped over it, and the room is lit with natural light.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:09:23Z"
+}

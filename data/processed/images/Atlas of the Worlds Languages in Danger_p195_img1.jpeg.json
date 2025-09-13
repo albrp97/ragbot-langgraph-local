@@ -1,0 +1,17 @@
+{
+  "image_id": "Atlas of the Worlds Languages in Danger_p195_img1.jpeg",
+  "image_path": "data\\processed\\images\\Atlas of the Worlds Languages in Danger_p195_img1.jpeg",
+  "file_name": "Atlas of the Worlds Languages in Danger_p195_img1.jpeg",
+  "source_pdf": "Atlas of the Worlds Languages in Danger.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Atlas of the Worlds Languages in Danger.pdf",
+  "page": 195,
+  "bytes": 42646,
+  "width": 1125,
+  "height": 942,
+  "caption": "arafed map of africa with a black background and a white outline",
+  "description": "The Arafid Map of Africa features a black background with a white outline, creating a visually distinct representation of the continent. The map includes key geographical features such as rivers, mountains, and landmarks, all rendered in a clear and precise manner. The layout emphasizes spatial relationships between regions, making it easy to navigate through Africa's diverse landscapes. Objects like trees, landmarks, and natural elements are clearly outlined, while actions such as walking or observing the terrain are implied to enhance the reader’s understanding of the map's purpose. The design maintains a clean and informative structure, ensuring that both the colors and the details contribute to a factual and accurate depiction of the African region.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:07:25Z"
+}

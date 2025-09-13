@@ -1,0 +1,17 @@
+{
+  "image_id": "Making It Modern_p1_img2.jpeg",
+  "image_path": "data\\processed\\images\\Making It Modern_p1_img2.jpeg",
+  "file_name": "Making It Modern_p1_img2.jpeg",
+  "source_pdf": "Making It Modern.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Making It Modern.pdf",
+  "page": 1,
+  "bytes": 110414,
+  "width": 853,
+  "height": 1103,
+  "caption": "there is a plate with a painting on it on a table",
+  "description": "There is a plate with a painting on it on a wooden table. The painting features vibrant colors and intricate details, creating a visually appealing scene. A small red circle on the painting represents the center, while a white background adds depth. The plate is placed on a sturdy wooden surface, and the painting is positioned to allow for easy access to the contents. The table itself has a smooth finish and a slight groove for proper placement of the painting. The colors used in the painting are predominantly bright red and blue, which contrast beautifully with the white background. The object on the table includes the painting and the plate, which are both clearly visible. The arrangement shows spatial relationships between the objects, with the painting and plate sitting side by side on the table.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:07:59Z"
+}

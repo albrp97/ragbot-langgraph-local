@@ -1,0 +1,17 @@
+{
+  "image_id": "Making It Modern_p5_img1.jpeg",
+  "image_path": "data\\processed\\images\\Making It Modern_p5_img1.jpeg",
+  "file_name": "Making It Modern_p5_img1.jpeg",
+  "source_pdf": "Making It Modern.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Making It Modern.pdf",
+  "page": 5,
+  "bytes": 64607,
+  "width": 853,
+  "height": 1104,
+  "caption": "there is a vase with a seahorse design on it",
+  "description": "There is a vase with a seahorse design, its body adorned with soft pink hues and flowing white petals that create a serene visual impact. The seahorse is positioned in a circular arrangement, its head and tail gracefully spiraling outward, suggesting a natural and elegant form. A small wooden handle supports the vase, adding to its decorative appeal. The seahorse's body is illuminated by a soft blue light, casting an ethereal glow over the piece. This design invites both artistic expression and a sense of tranquility.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:08:05Z"
+}

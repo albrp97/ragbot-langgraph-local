@@ -1,0 +1,17 @@
+{
+  "image_id": "Atlas of the Worlds Languages in Danger_p171_img2.jpeg",
+  "image_path": "data\\processed\\images\\Atlas of the Worlds Languages in Danger_p171_img2.jpeg",
+  "file_name": "Atlas of the Worlds Languages in Danger_p171_img2.jpeg",
+  "source_pdf": "Atlas of the Worlds Languages in Danger.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Atlas of the Worlds Languages in Danger.pdf",
+  "page": 171,
+  "bytes": 63904,
+  "width": 1405,
+  "height": 973,
+  "caption": "arafed map of the americas with a black background",
+  "description": "The Arafed Map of the Americas, featuring a black background, showcases a complex network of interconnected landmasses spanning from the southern United States to the northern regions of Mexico. The map includes prominent landmarks such as the Great Pyramid of Giza, the Great Wall of China, and the Grand Canyon. Colors are predominantly used in a muted palette to represent the diverse cultural and natural landscapes of the region. Objects on the map include traditional symbols, archaeological sites, and architectural structures that reflect the historical and cultural significance of the area. Spatial relations are clearly depicted using lines and markers to illustrate the geographical layout of the continent. The map also highlights key events and places, such as the fall of the Aztec Empire, which adds depth to its historical context.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:06:59Z"
+}

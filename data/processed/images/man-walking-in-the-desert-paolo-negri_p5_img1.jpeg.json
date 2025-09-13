@@ -1,0 +1,17 @@
+{
+  "image_id": "man-walking-in-the-desert-paolo-negri_p5_img1.jpeg",
+  "image_path": "data\\processed\\images\\man-walking-in-the-desert-paolo-negri_p5_img1.jpeg",
+  "file_name": "man-walking-in-the-desert-paolo-negri_p5_img1.jpeg",
+  "source_pdf": "man-walking-in-the-desert-paolo-negri.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\man-walking-in-the-desert-paolo-negri.pdf",
+  "page": 5,
+  "bytes": 157082,
+  "width": 1200,
+  "height": 1200,
+  "caption": "there are two giraffes and a zebra standing next to each other",
+  "description": "There are two giraffes and a zebra standing next to each other. The scene features vibrant red and yellow hues, with the giraffes having long necks and the zebra sporting a white coat. A small, green leafy plant is positioned between them, creating a natural barrier. The two giraffes are actively grazing on grass, while the zebra moves gracefully along the ground, their bodies showing signs of activity. The arrangement suggests a peaceful and serene environment, with clear spatial relationships between the animals and the nearby object.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:09:26Z"
+}

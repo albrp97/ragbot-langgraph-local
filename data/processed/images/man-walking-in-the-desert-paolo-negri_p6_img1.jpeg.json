@@ -1,0 +1,17 @@
+{
+  "image_id": "man-walking-in-the-desert-paolo-negri_p6_img1.jpeg",
+  "image_path": "data\\processed\\images\\man-walking-in-the-desert-paolo-negri_p6_img1.jpeg",
+  "file_name": "man-walking-in-the-desert-paolo-negri_p6_img1.jpeg",
+  "source_pdf": "man-walking-in-the-desert-paolo-negri.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\man-walking-in-the-desert-paolo-negri.pdf",
+  "page": 6,
+  "bytes": 78015,
+  "width": 900,
+  "height": 803,
+  "caption": "there is a blue and white vase with a bird and horse design",
+  "description": "There is a blue and white vase in the living room, featuring a bird and a horse on its base. The vase has a smooth, polished surface with a soft blue finish. A small bird is perched on the top, while a horse is standing nearby, their designs blending seamlessly into the vase’s form. The space between the bird and horse appears to be open, creating a playful and whimsical atmosphere. The vase is centered in the room, and the bird and horse are positioned to the left and right respectively, adding visual interest to the scene. The colors of the vase and the bird/horse are both vibrant and consistent, making the design visually appealing and informative.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:09:30Z"
+}

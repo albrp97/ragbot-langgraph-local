@@ -1,0 +1,17 @@
+{
+  "image_id": "Making It Modern_p27_img1.jpeg",
+  "image_path": "data\\processed\\images\\Making It Modern_p27_img1.jpeg",
+  "file_name": "Making It Modern_p27_img1.jpeg",
+  "source_pdf": "Making It Modern.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Making It Modern.pdf",
+  "page": 27,
+  "bytes": 78107,
+  "width": 741,
+  "height": 947,
+  "caption": "a close up of a plate with a design on it",
+  "description": "A close-up of a plate features a geometric design, possibly abstract or stylized, with vibrant colors such as deep blues and warm whites. The plate is positioned in a modern kitchen setting, with a clear glass surface visible. A small, decorative object is placed near the plate, adding a touch of interest. The design appears to be centered on the plate, creating a balanced visual composition. The scene appears to be in a quiet, open kitchen, with minimal distractions. The plate’s design suggests a playful or artistic theme, while the surrounding elements contribute to the overall aesthetic.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:08:27Z"
+}

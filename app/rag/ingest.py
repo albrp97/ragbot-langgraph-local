@@ -2,6 +2,10 @@ from __future__ import annotations
 from pathlib import Path
 from typing import List, Dict, Iterable, Tuple
 import hashlib, json, shutil, datetime
+import fitz
+from PIL import Image
+import io, torch
+from transformers import pipeline
 
 from app.config.settings import settings
 
@@ -9,7 +13,7 @@ from langchain_community.document_loaders import PyMuPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
-
+from langchain_core.documents import Document
 
 # ---------- Manifest utils ----------
 def _manifest_path() -> Path:
@@ -61,8 +65,221 @@ def _splitter():
         separators=["\n\n", "\n", ". ", " ", ""],
     )
 
+# ---------- Image captioner (lazy-loaded) ----------
+_CAPTION_MODEL = None
+_CAPTION_PROCESSOR = None
+_CAPTION_PIPE = None
+MIN_IMAGE_BYTES = 40_000
+
+def _ensure_images_dir() -> Path:
+    p = Path(settings.images_dir)
+    p.mkdir(parents=True, exist_ok=True)
+    return p
+
+def _load_captioner():
+    global _CAPTION_MODEL, _CAPTION_PROCESSOR, _CAPTION_PIPE
+    if _CAPTION_PIPE is not None:
+        return
+    # Always use generic image-to-text pipeline (BLIP / ViT-GPT2 / etc.)
+    device = 0 if (settings.device in ("cuda", "auto") and torch.cuda.is_available()) else -1
+    _CAPTION_PIPE = pipeline("image-to-text", model=settings.image_retrieval_id, device=device)
+    _CAPTION_MODEL = None
+    _CAPTION_PROCESSOR = None
+
+
+def _write_image_meta_json(
+    img_path: Path,
+    pdf_path: Path,
+    page_no: int,
+    caption_short: str | None,
+    description: str | None,
+    bytes_len: int | None = None,
+    width: int | None = None,
+    height: int | None = None,
+) -> Path:
+    """
+    Write a sidecar JSON with metadata + caption + description for a single extracted image.
+    Returns the JSON path.
+    """
+    meta = {
+        "image_id": img_path.name,
+        "image_path": str(img_path),
+        "file_name": img_path.name,
+        "source_pdf": pdf_path.name,
+        "source_pdf_path": str(pdf_path),
+        "page": page_no,
+        "bytes": bytes_len,
+        "width": width,
+        "height": height,
+        "caption": (caption_short or description or ""),   # short if available
+        "description": (description or caption_short or ""),  # rich VL output
+        "modality": "image",
+        "content_type": "image_caption",
+        "caption_model_id": settings.image_retrieval_id,
+        "created": _utc_now(),
+    }
+    json_path = img_path.with_suffix(img_path.suffix + ".json")
+    json_path.write_text(json.dumps(meta, indent=2, ensure_ascii=False), encoding="utf-8")
+    return json_path
+
+
+
+def _caption_image(img_path: Path) -> tuple[str, str | None]:
+    """
+    Return (description, caption_short) using a generic image-to-text pipeline.
+    - description: an expanded, richer description for retrieval
+    - caption_short: the raw short caption from the vision model
+    """
+    _load_captioner()
+    try:
+        out = _CAPTION_PIPE(str(img_path), max_new_tokens=min(256, settings.llm_max_new_tokens))
+        short = (out[0].get("generated_text", "") if out else "").strip()
+    except Exception:
+        short = ""
+
+    # Expand the short caption into a richer description (best-effort)
+    description = short
+    if short:
+        try:
+            from app.llm.chat import generate
+            description = generate(
+                "Expand this short caption into a detailed, strictly factual 3-6 sentence description. "
+                "Include colors, objects, spatial relations, actions, and any visible text; avoid hallucinations.\n\n"
+                f"Short caption: {short}\n\nDetailed description:",
+                max_new_tokens=min(256, settings.llm_max_new_tokens),
+            ).strip() or short
+        except Exception:
+            description = short
+
+    return description, (short or None)
+
+
+def _extract_images_for_file(pdf: Path) -> List[dict]:
+    """
+    Extract images from a PDF and save them under settings.images_dir.
+    Returns a list of dicts:
+      { "path": Path, "page": int, "bytes": int, "width": int, "height": int, "ext": str }
+    Skips images smaller than MIN_IMAGE_BYTES.
+    """
+    out_dir = _ensure_images_dir()
+    saved: List[dict] = []
+    try:
+        doc = fitz.open(str(pdf))
+    except Exception:
+        return saved
+
+    stem = pdf.stem
+    for pno in range(len(doc)):
+        page = doc[pno]
+        try:
+            images = page.get_images(full=True)
+        except Exception:
+            images = []
+        for idx, img in enumerate(images, start=1):
+            xref = img[0]
+            try:
+                base = doc.extract_image(xref)
+                ext = (base.get("ext") or "png").lower()
+                img_bytes = base.get("image")
+                width = base.get("width")
+                height = base.get("height")
+                if not img_bytes or len(img_bytes) < MIN_IMAGE_BYTES:
+                    continue
+                name = f"{stem}_p{pno+1}_img{idx}.{ext}"
+                path = out_dir / name
+                with open(path, "wb") as f:
+                    f.write(img_bytes)
+                saved.append({
+                    "path": path,
+                    "page": pno + 1,
+                    "bytes": len(img_bytes),
+                    "width": width,
+                    "height": height,
+                    "ext": ext,
+                })
+            except Exception:
+                continue
+    doc.close()
+    return saved
 
 # ---------- Core ingestion helpers ----------
+
+def _process_one_pdf_stream(vs: Chroma, pdf: Path) -> Iterable[dict]:
+    added_total = 0
+
+    # ---- Images → captions
+    entries = _extract_images_for_file(pdf)  # list of dicts
+    img_n = len(entries)
+    if img_n > 0:
+        caption_docs: list[Document] = []
+        for j, ent in enumerate(entries, start=1):
+            img_path: Path = ent["path"]
+            page_no: int = ent["page"]
+            bytes_len = ent.get("bytes")
+            width = ent.get("width")
+            height = ent.get("height")
+
+            try:
+                description, short = _caption_image(img_path)
+                description = (description or "").strip()
+                short = (short or "").strip() or None
+            except Exception:
+                description, short = "", None
+
+            # sidecar JSON (includes both caption + description)
+            _write_image_meta_json(
+                img_path=img_path,
+                pdf_path=pdf,
+                page_no=page_no,
+                caption_short=short,
+                description=description,
+                bytes_len=bytes_len,
+                width=width,
+                height=height,
+            )
+
+            if description:
+                meta = {
+                    "source_name": pdf.name,
+                    "source": str(pdf),
+                    "page": page_no,
+                    "modality": "image",
+                    "image_path": str(img_path),
+                    "image_id": img_path.name,
+                    "content_type": "image_caption",
+                }
+                # Store the *rich* description in the vector store
+                caption_docs.append(Document(page_content=description, metadata=meta))
+
+            # Stream: show the (rich) description snippet
+            snippet = (description[:160] + "…") if len(description) > 160 else description
+            yield {
+                "phase": "images",
+                "file": pdf.name,
+                "img_i": j,
+                "img_n": img_n,
+                "image": img_path.name,
+                "caption": snippet,
+            }
+
+        if caption_docs:
+            vs.add_documents(caption_docs)
+            added_total += len(caption_docs)
+
+    # ---- Text chunks
+    docs = _load_docs_for_file(pdf)
+    splitter = _splitter()
+    docs = splitter.split_documents(docs)
+    chunks = len(docs)
+    if docs:
+        vs.add_documents(docs)
+        added_total += chunks
+    yield {"phase": "text", "file": pdf.name, "chunks": chunks}
+
+    # ---- Final per-file summary
+    yield {"phase": "file_done", "file": pdf.name, "added_total": added_total}
+
+
 def _load_docs_for_file(pdf: Path):
     loader = PyMuPDFLoader(str(pdf))
     docs = loader.load()
@@ -89,36 +306,87 @@ def _delete_file_from_vs(vs: Chroma, short_name: str):
         pass
 
 def _ingest_files(vs: Chroma, files: List[Path]) -> Dict[str, int]:
-    """Return {short_name: n_chunks} for reporting/manifest."""
+    """Return {short_name: n_chunks} counting text + image-caption docs."""
     splitter = _splitter()
     added: Dict[str, int] = {}
     for pdf in files:
+        total_for_file = 0
+
+        # ---- Text chunks
         docs = _load_docs_for_file(pdf)
         docs = splitter.split_documents(docs)
         if docs:
             vs.add_documents(docs)
-            added[pdf.name] = len(docs)
+            total_for_file += len(docs)
+
+        # ---- Image captions -> documents (and JSON sidecars)
+        img_entries = _extract_images_for_file(pdf)  # list of dicts
+        if img_entries:
+            caption_docs: List[Document] = []
+            for ent in img_entries:
+                img_path: Path = ent["path"]
+                page_no: int = ent["page"]
+                bytes_len = ent.get("bytes")
+                width = ent.get("width")
+                height = ent.get("height")
+
+                try:
+                    description, short = _caption_image(img_path)
+                    description = (description or "").strip()
+                    short = (short or "").strip() or None
+                except Exception:
+                    description, short = "", None
+
+                # sidecar JSON
+                _write_image_meta_json(
+                    img_path=img_path,
+                    pdf_path=pdf,
+                    page_no=page_no,
+                    caption_short=short,
+                    description=description,
+                    bytes_len=bytes_len,
+                    width=width,
+                    height=height,
+                )
+
+                if not description:
+                    continue
+                meta = {
+                    "source_name": pdf.name,           # for filtering
+                    "source": str(pdf),                # full path to PDF
+                    "page": page_no,
+                    "modality": "image",
+                    "image_path": str(img_path),
+                    "image_id": img_path.name,
+                    "content_type": "image_caption",
+                }
+                # Store the *rich* description in the vector store
+                caption_docs.append(Document(page_content=description, metadata=meta))
+
+            if caption_docs:
+                vs.add_documents(caption_docs)
+                total_for_file += len(caption_docs)
+
+        if total_for_file:
+            added[pdf.name] = total_for_file
+
     return added
 
 
 # ---------- Public: plan + execute with progress ----------
 def check_and_ingest_if_needed(raw_dir: Path, collection_name: str = "docs_text") -> Tuple[bool, Dict]:
-    """
-    Non-UI helper: returns (changed, report) without printing.
-    changed=True if we modified the index.
-    """
     raw_dir = Path(raw_dir)
     raw_dir.mkdir(parents=True, exist_ok=True)
     manifest = _read_manifest()
     current_embed = settings.embedding_id
+    current_caption_model = getattr(settings, "image_retrieval_id", "")
 
-    # Collect current files and hashes
     pdfs = sorted([p for p in raw_dir.glob("*.pdf") if p.is_file()])
     current = {p.name: {"sha256": _file_sha256(p), "path": str(p)} for p in pdfs}
 
-    # Decide if full rebuild is needed
     prev_embed = manifest.get("embedding_id")
-    full_rebuild = (prev_embed is None) or (prev_embed != current_embed)
+    prev_caption_model = manifest.get("caption_model_id")
+    full_rebuild = (prev_embed != current_embed) or (prev_caption_model != current_caption_model)
 
     report = {"full_rebuild": full_rebuild, "added": [], "changed": [], "removed": [], "kept": []}
 
@@ -187,17 +455,19 @@ def run_ingest_plan(raw_dir: Path, report: Dict, collection_name: str = "docs_te
 # ---------- UI-friendly: generator with progress ----------
 def check_and_ingest_stream(raw_dir: Path, collection_name: str = "docs_text") -> Iterable[dict | str]:
     """
-    Yields progress updates for Gradio as dicts:
-      {"msg": "...", "file": "name.pdf", "i": current_step, "n": total_steps}
-    UI shows a progress bar from i/n and the current file being processed.
+    Yields progress updates for Gradio.
+    Events may include:
+      {"msg": "...", "file": "name.pdf", "i": current_file_idx, "n": total_files}
+      {"phase":"images", "file":"...", "img_i":j, "img_n":m, "image":"...", "caption":"..."}
+      {"phase":"text",   "file":"...", "chunks":K}
+      {"phase":"file_done","file":"...", "added_total":T}
     """
     raw_dir = Path(raw_dir)
     yield {"msg": "Checking documents and embedding version…", "file": "", "i": 0, "n": 1}
 
-    # Plan work
     changed, plan = check_and_ingest_if_needed(raw_dir, collection_name)
 
-    # Full rebuild path
+    # ---------- Full rebuild ----------
     if plan.get("full_rebuild"):
         if Path(settings.chroma_path).exists():
             yield {"msg": "Embedding changed → clearing vector store…", "file": "", "i": 0, "n": 1}
@@ -210,23 +480,29 @@ def check_and_ingest_stream(raw_dir: Path, collection_name: str = "docs_text") -
             return
 
         vs = _vectordb(collection_name)
-        splitter = _splitter()
         counts: Dict[str, int] = {}
-
         n = len(files)
-        for i, pdf in enumerate(files, start=1):
-            yield {"msg": "Indexing", "file": pdf.name, "i": i, "n": n}
-            # ingest this single file
-            docs = _load_docs_for_file(pdf)
-            docs = splitter.split_documents(docs)
-            if docs:
-                vs.add_documents(docs)
-                counts[pdf.name] = len(docs)
-            else:
-                counts[pdf.name] = 0
+        for idx, pdf in enumerate(files, start=1):
+            # update file-level (PDF) progress bar
+            yield {"msg": "Indexing", "file": pdf.name, "i": idx, "n": n}
+            added_total = 0
+            for ev in _process_one_pdf_stream(vs, pdf):
+                # pass through with outer file progress
+                if isinstance(ev, dict):
+                    ev.setdefault("i", idx)
+                    ev.setdefault("n", n)
+                yield ev
+                if isinstance(ev, dict) and ev.get("phase") == "file_done":
+                    added_total = int(ev.get("added_total", 0))
+            counts[pdf.name] = added_total
 
         # Write fresh manifest
-        manifest = {"embedding_id": settings.embedding_id, "updated": _utc_now(), "files": {}}
+        manifest = {
+            "embedding_id": settings.embedding_id,
+            "caption_model_id": settings.image_retrieval_id,
+            "updated": _utc_now(),
+            "files": {}
+        }
         for p in files:
             manifest["files"][p.name] = {
                 "sha256": _file_sha256(p),
@@ -237,13 +513,12 @@ def check_and_ingest_stream(raw_dir: Path, collection_name: str = "docs_text") -
         yield {"msg": "Rebuild complete.", "file": "", "i": n, "n": n}
         return
 
-    # Incremental path
+    # ---------- Incremental ----------
     removed = plan.get("removed", []) or []
     added = plan.get("added", []) or []
     changed_files = plan.get("changed", []) or []
     kept = plan.get("kept", []) or []
 
-    # Nothing to do
     if not (removed or added or changed_files):
         yield {"msg": "All documents are up to date.", "file": "", "i": 1, "n": 1}
         return
@@ -252,7 +527,6 @@ def check_and_ingest_stream(raw_dir: Path, collection_name: str = "docs_text") -
     prev_files = prev_manifest.get("files", {}) if isinstance(prev_manifest, dict) else {}
 
     vs = _vectordb(collection_name)
-    splitter = _splitter()
 
     ops_total = len(removed) + len(added) + len(changed_files)
     step = 0
@@ -269,45 +543,44 @@ def check_and_ingest_stream(raw_dir: Path, collection_name: str = "docs_text") -
             yield {"msg": "Removing outdated chunks", "file": name, "i": step, "n": ops_total}
             _delete_file_from_vs(vs, name)
 
-    # 2) Ingest added + changed
-    added_counts: Dict[str, int] = {}
-    for name in added + changed_files:
-        step += 1
+    # 2) Ingest added + changed with streaming (images + text)
+    current_counts: Dict[str, int] = {}
+    todo = added + changed_files
+    n_files = len(todo) if todo else 1
+    for idx, name in enumerate(todo, start=1):
         pdf = raw_dir / name
-        yield {"msg": "Indexing", "file": name, "i": step, "n": ops_total}
+        yield {"msg": "Indexing", "file": name, "i": idx, "n": n_files}
         if not pdf.exists():
-            # Skip if missing
             continue
-        docs = _load_docs_for_file(pdf)
-        docs = splitter.split_documents(docs)
-        if docs:
-            vs.add_documents(docs)
-            added_counts[name] = len(docs)
-        else:
-            added_counts[name] = 0
+        added_total = 0
+        for ev in _process_one_pdf_stream(vs, pdf):
+            if isinstance(ev, dict):
+                ev.setdefault("i", idx)
+                ev.setdefault("n", n_files)
+            yield ev
+            if isinstance(ev, dict) and ev.get("phase") == "file_done":
+                added_total = int(ev.get("added_total", 0))
+        current_counts[name] = added_total
 
-    # 3) Write new manifest (kept + newly ingested; removed are omitted)
+    # 3) Write new manifest (kept + newly ingested; removed omitted)
     manifest = {"embedding_id": settings.embedding_id, "updated": _utc_now(), "files": {}}
-    # current files in dir (after removals)
     current_files = sorted([p for p in raw_dir.glob("*.pdf") if p.is_file()])
-    current_names = [p.name for p in current_files]
     for p in current_files:
         name = p.name
-        if name in added_counts:  # newly added/changed
+        if name in current_counts: 
             manifest["files"][name] = {
                 "sha256": _file_sha256(p),
-                "chunks": added_counts.get(name, 0),
+                "chunks": current_counts.get(name, 0),
                 "last_ingested": _utc_now(),
             }
         elif name in kept:
             prev = prev_files.get(name, {})
             manifest["files"][name] = {
-                "sha256": _file_sha256(p),  # refresh hash in case it silently changed
+                "sha256": _file_sha256(p),
                 "chunks": prev.get("chunks"),
                 "last_ingested": prev.get("last_ingested", _utc_now()),
             }
         else:
-            # If a file is present but not in any bucket (edge case), treat as kept
             prev = prev_files.get(name, {})
             manifest["files"][name] = {
                 "sha256": _file_sha256(p),
@@ -316,7 +589,8 @@ def check_and_ingest_stream(raw_dir: Path, collection_name: str = "docs_text") -
             }
 
     _write_manifest(manifest)
-    yield {"msg": f"Index updated. {len(current_names)} files tracked.", "file": "", "i": ops_total, "n": ops_total or 1}
+    yield {"msg": f"Index updated. {len(manifest.get('files', {}))} files tracked.", "file": "", "i": 1, "n": 1}
+
 
 
 # ---------- Document management helpers ----------

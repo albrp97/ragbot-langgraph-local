@@ -1,0 +1,17 @@
+{
+  "image_id": "Atlas of the Worlds Languages in Danger_p163_img1.jpeg",
+  "image_path": "data\\processed\\images\\Atlas of the Worlds Languages in Danger_p163_img1.jpeg",
+  "file_name": "Atlas of the Worlds Languages in Danger_p163_img1.jpeg",
+  "source_pdf": "Atlas of the Worlds Languages in Danger.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Atlas of the Worlds Languages in Danger.pdf",
+  "page": 163,
+  "bytes": 68236,
+  "width": 1402,
+  "height": 970,
+  "caption": "arafed map of the world with all the countries in black and white",
+  "description": "The Arafed Map of the World, created using high-resolution satellite imagery and a combination of geographic data and color coding, visually represents the entire planet in a black-and-white format. It accurately maps every country, region, and natural feature with precision, allowing users to explore and compare different parts of the globe. The map features prominent landmarks, national symbols, and cultural elements that help highlight key geographical and cultural identities. The layout is organized spatially, with clear divisions and annotations for easy navigation. The design uses simple, consistent color schemes—black for the background and white for the data—to ensure readability and clarity. This map provides an intuitive way to understand global geography and cultural diversity.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:06:42Z"
+}

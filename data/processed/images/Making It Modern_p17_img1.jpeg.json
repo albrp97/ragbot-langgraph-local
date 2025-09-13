@@ -1,0 +1,17 @@
+{
+  "image_id": "Making It Modern_p17_img1.jpeg",
+  "image_path": "data\\processed\\images\\Making It Modern_p17_img1.jpeg",
+  "file_name": "Making It Modern_p17_img1.jpeg",
+  "source_pdf": "Making It Modern.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Making It Modern.pdf",
+  "page": 17,
+  "bytes": 40082,
+  "width": 791,
+  "height": 773,
+  "caption": "there are two vases that are sitting next to each other",
+  "description": "There are two vases placed side by side on a wooden table, one with a red ceramic handle and the other featuring a blue glass body, their surfaces contrasting in color and texture. The vases are positioned horizontally, with the red vase slightly taller than the blue one, creating a visual hierarchy. A soft green light filters through the space, casting gentle shadows across both vessels. One vase holds a white flower in its center, while the other contains a fresh juice mixture, showcasing a variety of elements within the scene. The arrangement maintains a calm, peaceful atmosphere, emphasizing the natural beauty of the objects placed together.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:08:20Z"
+}

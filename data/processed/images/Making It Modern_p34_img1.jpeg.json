@@ -1,0 +1,17 @@
+{
+  "image_id": "Making It Modern_p34_img1.jpeg",
+  "image_path": "data\\processed\\images\\Making It Modern_p34_img1.jpeg",
+  "file_name": "Making It Modern_p34_img1.jpeg",
+  "source_pdf": "Making It Modern.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Making It Modern.pdf",
+  "page": 34,
+  "bytes": 79802,
+  "width": 741,
+  "height": 892,
+  "caption": "a close up of a plate with a painting of a crab on it",
+  "description": "A close-up of a wooden plate features a vibrant painting of a crab on its surface, painted in deep blue and white hues. The crab is depicted with a wide body and sharp eyes, surrounded by soft light that highlights the colors. The plate is placed on a sturdy wooden countertop, and the painting adds a touch of whimsy to the scene. A small, colorful object is positioned beside the plate, adding to the visual appeal. The action of the painting is clear, with the crab’s movement and the light source casting shadows in the background. The colors and objects provide a detailed and realistic portrayal of the scene.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:08:42Z"
+}

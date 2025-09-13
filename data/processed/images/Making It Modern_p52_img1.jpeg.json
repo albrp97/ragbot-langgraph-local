@@ -1,0 +1,17 @@
+{
+  "image_id": "Making It Modern_p52_img1.jpeg",
+  "image_path": "data\\processed\\images\\Making It Modern_p52_img1.jpeg",
+  "file_name": "Making It Modern_p52_img1.jpeg",
+  "source_pdf": "Making It Modern.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Making It Modern.pdf",
+  "page": 52,
+  "bytes": 76879,
+  "width": 854,
+  "height": 1104,
+  "caption": "there is a vase with an owl design on it",
+  "description": "There is a vase with an owl design on its surface, featuring a stylized owl with a pointed head and wings. The vase is made of a dark red wood that has been polished to a smooth finish. The design includes intricate patterns on the top and sides, creating a vibrant visual effect. A small white ceramic tile sits beside the vase, adding a playful touch. The space between the vase and the tile is filled with soft blue lighting, creating a warm and inviting atmosphere. The owl's eyes are large and expressive, casting a gentle glow onto the object.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:09:05Z"
+}

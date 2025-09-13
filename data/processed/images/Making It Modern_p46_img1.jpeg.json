@@ -1,0 +1,17 @@
+{
+  "image_id": "Making It Modern_p46_img1.jpeg",
+  "image_path": "data\\processed\\images\\Making It Modern_p46_img1.jpeg",
+  "file_name": "Making It Modern_p46_img1.jpeg",
+  "source_pdf": "Making It Modern.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Making It Modern.pdf",
+  "page": 46,
+  "bytes": 42337,
+  "width": 741,
+  "height": 947,
+  "caption": "there is a vase with seahorses on it on a gray surface",
+  "description": "There is a vase with seahorses on its surface, depicted in a gray hue, and the seahorses are visible in vibrant golds and greens, their bodies partially encased in a soft, muted gray. The vase itself has a smooth, polished finish, with no cracks or imperfections. The seahorses are positioned on the vase, forming a delicate, flowing pattern that creates a sense of harmony. The space around them is open, allowing for natural light to filter through, casting a warm, golden glow. A few small, scattered textures on the vase add to its visual appeal, while the action of the seahorse movement adds to the dynamic composition. The scene is clear and precise, with no misleading or fabricated elements present.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:08:54Z"
+}

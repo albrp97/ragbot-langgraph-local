@@ -1,0 +1,17 @@
+{
+  "image_id": "Making It Modern_p32_img2.jpeg",
+  "image_path": "data\\processed\\images\\Making It Modern_p32_img2.jpeg",
+  "file_name": "Making It Modern_p32_img2.jpeg",
+  "source_pdf": "Making It Modern.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Making It Modern.pdf",
+  "page": 32,
+  "bytes": 48340,
+  "width": 350,
+  "height": 513,
+  "caption": "a drawing of a panel of floral designs with a variety of flowers",
+  "description": "A detailed, strictly factual 3-6 sentence description of the drawing:\n\nA panel of floral designs showcases a vibrant tapestry of blooming flowers arranged in a symmetrical layout. The artwork features a mix of colors—soft pastels, bright yellows, and warm oranges—creating a dreamy atmosphere. The central motif is a cascade of roses, surrounded by delicate lavender and pink petals. Each flower has been carefully placed to maintain a sense of spatial harmony, with plants arranged in clusters along a central axis. The composition includes elements like a sunlit flower and a hanging display of blossoms, adding visual interest. The overall scene reflects a tranquil, nature-inspired aesthetic, emphasizing the interplay of color and form.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:08:38Z"
+}

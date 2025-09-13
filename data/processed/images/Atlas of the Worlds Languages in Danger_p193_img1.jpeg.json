@@ -1,0 +1,17 @@
+{
+  "image_id": "Atlas of the Worlds Languages in Danger_p193_img1.jpeg",
+  "image_path": "data\\processed\\images\\Atlas of the Worlds Languages in Danger_p193_img1.jpeg",
+  "file_name": "Atlas of the Worlds Languages in Danger_p193_img1.jpeg",
+  "source_pdf": "Atlas of the Worlds Languages in Danger.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Atlas of the Worlds Languages in Danger.pdf",
+  "page": 193,
+  "bytes": 52073,
+  "width": 1379,
+  "height": 973,
+  "caption": "arafed image of a man holding a tennis racket in his hand",
+  "description": "A man holds a tennis racket in his hand, with the racket positioned on a flat, grassy field. The scene features a vibrant green field where the racket is centered and the man is standing near the edge. A red shirt is worn over the man's body, adding to the visual contrast. The racket emits a yellowish glow, creating a warm and inviting atmosphere. The man appears to be focused, with his eyes looking toward the field, while the racket’s motion is clearly visible. The overall scene is dynamic, showcasing the man’s presence and the sport he is engaged in.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:07:21Z"
+}

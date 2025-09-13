@@ -1,0 +1,17 @@
+{
+  "image_id": "Making It Modern_p18_img1.jpeg",
+  "image_path": "data\\processed\\images\\Making It Modern_p18_img1.jpeg",
+  "file_name": "Making It Modern_p18_img1.jpeg",
+  "source_pdf": "Making It Modern.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Making It Modern.pdf",
+  "page": 18,
+  "bytes": 40076,
+  "width": 539,
+  "height": 947,
+  "caption": "a close up of a plate with a flower on it",
+  "description": "A close-up of a plate features a vibrant yellow flower centered on its surface, surrounded by a green leaf arrangement that adds texture. The plate itself is made of a dark brown wood, which creates a warm, rustic aesthetic. The flower has a slight curve from the center to the edge, while the leaves form a circular pattern that enhances the visual appeal. The plate sits on a wooden surface, slightly tilted to emphasize the natural shape of the object. A few small droplets of water are visible on the flower, adding a touch of life to the scene. The color scheme includes yellow, green, and brown, with the flower and leaves in a harmonious blend.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:08:23Z"
+}

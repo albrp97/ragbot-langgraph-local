@@ -1,0 +1,17 @@
+{
+  "image_id": "Making It Modern_p31_img1.jpeg",
+  "image_path": "data\\processed\\images\\Making It Modern_p31_img1.jpeg",
+  "file_name": "Making It Modern_p31_img1.jpeg",
+  "source_pdf": "Making It Modern.pdf",
+  "source_pdf_path": "data\\raw_pdfs\\Making It Modern.pdf",
+  "page": 31,
+  "bytes": 81482,
+  "width": 455,
+  "height": 698,
+  "caption": "a drawing of a decorative design with blue and red colors",
+  "description": "A drawing portrays a whimsical decorative design featuring vibrant blue and bold red elements. The composition includes a stylized tree trunk rooted in the background, adorned with a cluster of colorful flowers that bloom at the top. A small, abstracted bird perches on a branch, its wings partially obscured by foliage. The scene is set in a warm, inviting atmosphere, with soft lighting casting golden hues across the entire image. The colors are consistent throughout, with deep blues and bright red accents creating an energetic visual. Objects such as the tree and flowers are placed in a dynamic spatial arrangement, with the bird serving as the focal point. The overall mood is cheerful and imaginative, capturing the essence of a decorative art piece.",
+  "modality": "image",
+  "content_type": "image_caption",
+  "caption_model_id": "Salesforce/blip-image-captioning-large",
+  "created": "2025-09-13T10:08:34Z"
+}
