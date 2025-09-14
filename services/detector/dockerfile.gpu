@@ -3,7 +3,7 @@ FROM ultralytics/ultralytics:latest
 WORKDIR /app
 COPY services/detector/app.py /app/app.py
 
-RUN pip install --no-cache-dir "fastapi>=0.110" "uvicorn[standard]>=0.23"
+RUN pip install --no-cache-dir "fastapi>=0.110" "uvicorn[standard]>=0.23" "python-multipart>=0.0.9"
 
 ENV DEVICE=cuda
 ENV DETECTOR_WEIGHTS=yolo11n.pt

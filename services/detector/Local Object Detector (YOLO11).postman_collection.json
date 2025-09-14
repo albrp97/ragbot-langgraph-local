@@ -1,0 +1,62 @@
+{
+	"info": {
+		"_postman_id": "bcbb1bae-cf3a-4fb7-8f4f-d4b8661281b9",
+		"name": "Local Object Detector (YOLO11)",
+		"description": "Test the local FastAPI YOLO11 detector service.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "46312157",
+		"_collection_link": "https://alberto-1339312.postman.co/workspace/alberto's-Workspace~fb1ccf13-4236-4857-8669-15a661a82b29/collection/46312157-bcbb1bae-cf3a-4fb7-8f4f-d4b8661281b9?action=share&source=collection_link&creator=46312157"
+	},
+	"item": [
+		{
+			"name": "Health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/health",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Detect (multipart file)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/detect",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"detect"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8001"
+		}
+	]
+}
