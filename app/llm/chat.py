@@ -27,7 +27,7 @@ def load_model():
     )
 
     if settings.device == "cuda":
-        # Explicit: load then move to single GPU
+        # load then move to single GPU
         _model = AutoModelForCausalLM.from_pretrained(
             settings.model_id,
             torch_dtype=dtype,
@@ -65,6 +65,8 @@ def preload_model():
     """Call this once at app startup to load & keep the model in memory."""
     load_model()
 
+# Generate text using the LLM with given parameters, they can override defaults from settings
+# returns generated text
 @torch.inference_mode()
 def generate(
     prompt: str,
@@ -80,7 +82,7 @@ def generate(
     thinking: Optional[bool] = None,
 ) -> str:
     model, tokenizer = load_model()
-    # from settings
+
     temperature = settings.llm_temperature if temperature is None else temperature
     top_p = settings.llm_top_p if top_p is None else top_p
     top_k = settings.llm_top_k if top_k is None else top_k
@@ -90,11 +92,13 @@ def generate(
     seed = settings.llm_seed if seed is None else seed
     enable_thinking = thinking if thinking is not None else settings.llm_reasoning
 
+    # set seed for reproducibility
     if isinstance(seed, int) and seed >= 0:
         torch.manual_seed(seed)
         if torch.cuda.is_available():
             torch.cuda.manual_seed_all(seed)
             
+    # apply chat template if available
     text = prompt
     if hasattr(tokenizer, "apply_chat_template"):
         messages = []
@@ -124,12 +128,12 @@ def generate(
         "max_new_tokens": int(max_new_tokens),
         "repetition_penalty": float(repetition_penalty),
         "pad_token_id": tokenizer.eos_token_id,
-        "do_sample": not greedy,  # bool
+        "do_sample": not greedy,
     }
 
     if not greedy:
         # Only include sampling knobs when actually sampling
-        # (avoid passing None/0 which triggers warnings)
+        # avoids passing None or 0
         if temperature is not None and float(temperature) > 0:
             gen_kwargs["temperature"] = float(temperature)
         if top_p is not None:
@@ -137,16 +141,18 @@ def generate(
         if top_k is not None and int(top_k) > 0:
             gen_kwargs["top_k"] = int(top_k)
 
-    # Call HF generate with a *clean* kwargs set
     gen_ids = model.generate(**inputs, **gen_kwargs)
     
+    # response decoding & cleanup
     prompt_len = inputs["input_ids"].shape[1]
     new_tokens = gen_ids[0][prompt_len:]
     out = tokenizer.decode(new_tokens, skip_special_tokens=True)
 
+    # remove <think>...</think> if reasoning not enabled
     if not enable_thinking:
         out = re.sub(r"<think>.*?</think>", "", out, flags=re.DOTALL).strip()
         out = re.sub(r"\n\s*\n", "\n\n", out).strip()
+    # remove leading "Assistant: " if present
     out = re.sub(r"^\s*(?:assistant|Assistant)\s*[:：-]*\s*", "", out).strip()
 
     # Trim prompt when using chat template

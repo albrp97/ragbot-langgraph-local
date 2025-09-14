@@ -16,6 +16,8 @@ from langchain_chroma import Chroma
 from langchain_core.documents import Document
 
 # ---------- Manifest utils ----------
+# manifest used to track ingested files, versions, etc.
+
 def _manifest_path() -> Path:
     return Path(settings.chroma_path) / ".manifest.json"
 
@@ -69,6 +71,8 @@ def _splitter():
 _CAPTION_MODEL = None
 _CAPTION_PROCESSOR = None
 _CAPTION_PIPE = None
+# could be moved to env
+# limit to images larger than ~40KB
 MIN_IMAGE_BYTES = 40_000
 
 def _ensure_images_dir() -> Path:
@@ -80,13 +84,14 @@ def _load_captioner():
     global _CAPTION_MODEL, _CAPTION_PROCESSOR, _CAPTION_PIPE
     if _CAPTION_PIPE is not None:
         return
-    # Always use generic image-to-text pipeline (BLIP / ViT-GPT2 / etc.)
+
     device = 0 if (settings.device in ("cuda", "auto") and torch.cuda.is_available()) else -1
     _CAPTION_PIPE = pipeline("image-to-text", model=settings.image_retrieval_id, device=device)
     _CAPTION_MODEL = None
     _CAPTION_PROCESSOR = None
 
-
+# writes JSON for an image
+# returns the JSON path
 def _write_image_meta_json(
     img_path: Path,
     pdf_path: Path,
@@ -123,7 +128,6 @@ def _write_image_meta_json(
     return json_path
 
 
-
 def _caption_image(img_path: Path) -> tuple[str, str | None]:
     """
     Return (description, caption_short) using a generic image-to-text pipeline.
@@ -153,7 +157,8 @@ def _caption_image(img_path: Path) -> tuple[str, str | None]:
 
     return description, (short or None)
 
-
+# Extract images from a PDF and save them under settings.images_dir.
+# returns a list of dicts with info about each saved image.
 def _extract_images_for_file(pdf: Path) -> List[dict]:
     """
     Extract images from a PDF and save them under settings.images_dir.
@@ -204,6 +209,8 @@ def _extract_images_for_file(pdf: Path) -> List[dict]:
 
 # ---------- Core ingestion helpers ----------
 
+# Use a generator to process one PDF at a time with progress updates
+# yields events for Gradio progress
 def _process_one_pdf_stream(vs: Chroma, pdf: Path) -> Iterable[dict]:
     added_total = 0
 
@@ -279,7 +286,7 @@ def _process_one_pdf_stream(vs: Chroma, pdf: Path) -> Iterable[dict]:
     # ---- Final per-file summary
     yield {"phase": "file_done", "file": pdf.name, "added_total": added_total}
 
-
+# Returns list of Documents for a given PDF file
 def _load_docs_for_file(pdf: Path):
     loader = PyMuPDFLoader(str(pdf))
     docs = loader.load()
@@ -290,6 +297,7 @@ def _load_docs_for_file(pdf: Path):
         d.metadata["source_name"] = short
     return docs
 
+# returns a Chroma vector store instance
 def _vectordb(collection_name: str = "docs_text") -> Chroma:
     return Chroma(
         collection_name=collection_name,
@@ -305,6 +313,8 @@ def _delete_file_from_vs(vs: Chroma, short_name: str):
         # best effort
         pass
 
+# Ingest a list of PDF files into the vector store
+# returns number of chunks added per file
 def _ingest_files(vs: Chroma, files: List[Path]) -> Dict[str, int]:
     """Return {short_name: n_chunks} counting text + image-caption docs."""
     splitter = _splitter()
@@ -352,7 +362,7 @@ def _ingest_files(vs: Chroma, files: List[Path]) -> Dict[str, int]:
                 if not description:
                     continue
                 meta = {
-                    "source_name": pdf.name,           # for filtering
+                    "source_name": pdf.name,
                     "source": str(pdf),                # full path to PDF
                     "page": page_no,
                     "modality": "image",
@@ -360,7 +370,7 @@ def _ingest_files(vs: Chroma, files: List[Path]) -> Dict[str, int]:
                     "image_id": img_path.name,
                     "content_type": "image_caption",
                 }
-                # Store the *rich* description in the vector store
+                # Store the rich description in the vector store
                 caption_docs.append(Document(page_content=description, metadata=meta))
 
             if caption_docs:
@@ -374,6 +384,8 @@ def _ingest_files(vs: Chroma, files: List[Path]) -> Dict[str, int]:
 
 
 # ---------- Public: plan + execute with progress ----------
+# Check if ingestion is needed (files changed, embedding changed, etc.)
+# returns changes bool and a report dict
 def check_and_ingest_if_needed(raw_dir: Path, collection_name: str = "docs_text") -> Tuple[bool, Dict]:
     raw_dir = Path(raw_dir)
     raw_dir.mkdir(parents=True, exist_ok=True)
@@ -416,6 +428,8 @@ def check_and_ingest_if_needed(raw_dir: Path, collection_name: str = "docs_text"
     any_change = bool(removed or added or changed)
     return any_change, report
 
+# Execute plan from check_and_ingest_if_needed (no streaming).
+# Returns updated manifest dict.
 def run_ingest_plan(raw_dir: Path, report: Dict, collection_name: str = "docs_text") -> Dict:
     """
     Execute plan from check_and_ingest_if_needed (no streaming).
@@ -453,6 +467,7 @@ def run_ingest_plan(raw_dir: Path, report: Dict, collection_name: str = "docs_te
 
 
 # ---------- UI-friendly: generator with progress ----------
+# Yields progress updates for Gradio.
 def check_and_ingest_stream(raw_dir: Path, collection_name: str = "docs_text") -> Iterable[dict | str]:
     """
     Yields progress updates for Gradio.
@@ -595,6 +610,7 @@ def check_and_ingest_stream(raw_dir: Path, collection_name: str = "docs_text") -
 
 # ---------- Document management helpers ----------
 
+# returns sorted PDF names from manifest; fall back to raw_pdfs dir if manifest empty.
 def list_tracked_files() -> List[str]:
     """Return sorted PDF names from manifest; fall back to raw_pdfs dir if manifest empty."""
     m = _read_manifest()
@@ -604,6 +620,7 @@ def list_tracked_files() -> List[str]:
     raw = Path("data/raw_pdfs")
     return sorted([p.name for p in raw.glob("*.pdf") if p.is_file()])
 
+# Save uploaded files into raw_pdfs; returns the short names copied.
 def save_uploaded_pdfs(tmp_paths: List[str | Path], dest_dir: Path | str = "data/raw_pdfs") -> List[str]:
     """Copy uploaded files into raw_pdfs; returns the short names copied."""
     dest = Path(dest_dir); dest.mkdir(parents=True, exist_ok=True)

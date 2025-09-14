@@ -20,13 +20,13 @@ _model: YOLO | None = None
 _model_device: str | None = None
 _class_names: Dict[int, str] = {}
 
-
+# returns device to use for model inference
 def _resolve_device() -> str:
     if DEVICE_ENV == "cuda" or (DEVICE_ENV == "auto" and torch.cuda.is_available()):
         return "cuda"
     return "cpu"
 
-
+# loads model if not already loaded
 def _load_model() -> None:
     global _model, _model_device, _class_names
     if _model is not None:
@@ -40,7 +40,7 @@ def _load_model() -> None:
     except Exception:
         _class_names = {i: str(i) for i in range(1000)}  # safe fallback
 
-
+# convert a single YOLO result to JSON for all detected classes
 def _to_json_dets(result) -> List[Dict[str, Any]]:
     """
     Convert a single YOLO result to JSON for *all* detected classes.
@@ -72,6 +72,7 @@ def _to_json_dets(result) -> List[Dict[str, Any]]:
 # -----------------------------
 # FastAPI
 # -----------------------------
+# Startup: load model
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     _load_model()
@@ -79,7 +80,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="Local Object Detector (YOLO11)", version="0.1.0", lifespan=lifespan)
 
-
+# Health check, returns model info, device and number of classes
 @app.get("/health")
 def health():
     _load_model()
@@ -90,7 +91,7 @@ def health():
         "num_classes": len(_class_names),
     }
 
-
+# Main detection endpoint, returns JSON with detections for all classes
 @app.post("/detect")
 async def detect(file: UploadFile = File(...)):
     """
@@ -117,7 +118,6 @@ async def detect(file: UploadFile = File(...)):
         "runtime_ms": round(dt_ms, 2),
     }
 
-
+# Start server with uvicorn
 if __name__ == "__main__":
-    # Run directly: python services/detector/app.py
     uvicorn.run(app, host="0.0.0.0", port=8001, reload=False)

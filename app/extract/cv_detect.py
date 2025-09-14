@@ -7,16 +7,19 @@ from langchain_community.document_loaders import PyMuPDFLoader
 from app.llm.chat import generate
 from app.extract.ocr_utils import ocr_first_pages
 
+# regular expressions for email, phone, date, URL
 EMAIL_RE = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
 PHONE_RE = re.compile(r"(\+?\d[\d\-\s\(\)]{6,}\d)")
 DATE_RE = re.compile(r"\b(20\d{2}|19\d{2})\b")
 URL_RE = re.compile(r"https?://[^\s)]+|(?:www\.)?[A-Za-z0-9-]+\.(?:com|org|net|io|ai|edu|dev)(?:/[^\s)]*)?")
 
+# Debugging utility
 DEBUG_DETECT = False
 def _dbgd(*a):
     if DEBUG_DETECT:
         print(*a)
 
+# Keywords commonly found in CVs resumes
 CV_TERMS = (
     "curriculum vitae","résumé","resume","cv","objective","summary","profile",
     "education","coursework","gpa","experience","work experience","research experience",
@@ -24,13 +27,15 @@ CV_TERMS = (
     "leadership","activities","languages"
 )
 
+# Loads the first few pages of a PDF and extracts text
+# returns text and total number of pages
 def _load_first_pages_text(pdf: Path, max_pages: int = 2) -> Tuple[str, int]:
     docs = PyMuPDFLoader(str(pdf)).load()
     total_pages = max((d.metadata or {}).get("page", 0) for d in docs) + 1 if docs else 0
     subset = [d for d in docs if (d.metadata or {}).get("page", 0) < max_pages]
     text = "\n".join(d.page_content for d in subset).strip()
 
-    # OCR fallback for image-only PDFs
+    # TODO: OCR fallback for image-only PDFs
     if len(text) < 40:
         try:
             text = ocr_first_pages(pdf, max_pages=max_pages, dpi=220, lang="eng")
@@ -69,6 +74,7 @@ def heuristic_cv_score(text: str, total_pages: int) -> Tuple[float, List[str]]:
     score = max(0.0, min(1.0, score))
     return score, reasons
 
+# LLM-based CV detection
 LLM_CLASSIFY_PROMPT = """You are a strict document classifier.
 Decide if the text is a CV/resume (job-seeking document listing education, experience, skills).
 Return ONLY minified JSON: {"is_cv": true|false}.
@@ -78,6 +84,8 @@ Text:
 
 JSON:"""
 
+# Use LLM to classify if document is CV/resume
+# returns True if CV, False otherwise
 def llm_is_cv(text: str) -> bool:
     raw = generate(
         LLM_CLASSIFY_PROMPT.format(doc=text[:6000]), # only first 6k chars
@@ -89,6 +97,8 @@ def llm_is_cv(text: str) -> bool:
         if s.startswith("json"): s = s[4:].lstrip()
     return '"is_cv": true' in s or "'is_cv': true" in s
 
+# Main function to detect if a PDF is a CV/resume
+# Uses heuristic scoring and LLM fallback if uncertain (for performance)
 def detect_cv(pdf_path: str | Path) -> Dict[str, Any]:
     pdf = Path(pdf_path)
     text, total_pages = _load_first_pages_text(pdf, max_pages=2)

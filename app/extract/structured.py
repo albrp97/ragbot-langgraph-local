@@ -10,12 +10,13 @@ from pydantic import BaseModel
 from app.llm.chat import generate
 from app.extract.schemas import SCHEMAS
 
+# Debugging utility
 DEBUG_DEFAULT = False
 def _dbg(debug: bool, *args):
     if debug:
         print(*args)
         
-# Example JSON to guide the model (few-shot)
+# Example JSON to guide the model
 EXAMPLE_CV_JSON = """
 {
   "file_name": "studentaffairs.stanford.edu/cdc",
@@ -102,7 +103,7 @@ EXAMPLE_CV_JSON = """
 }
 """.strip()
 
-
+# Prompt template for structured extraction
 PROMPT = """You extract structured data from a CV/resume.
 
 First, here is an EXAMPLE JSON (for format/style guidance ONLY — do not copy its values):
@@ -122,6 +123,9 @@ STRICT rules:
 
 # JSON:"""
 
+# Loads text from PDF, optionally only a page range, and applies OCR if needed
+# TODO test OCR capability
+# returns text and whether OCR was used
 def _load_text(pdf_path: Path, pages: Optional[tuple[int, int]] = None, chunk_size: int = 3000) -> tuple[str, bool]:
     docs = PyMuPDFLoader(str(pdf_path)).load()
     if pages is not None:
@@ -145,6 +149,9 @@ def _load_text(pdf_path: Path, pages: Optional[tuple[int, int]] = None, chunk_si
     chunks = splitter.split_text(text)
     return "\n\n".join(chunks), used_ocr
 
+# Main function to extract structured data from PDF using LLM
+# TODO add guardrails for JSON validity
+# returns path to the raw JSON file
 def extract_to_json(
     pdf_path: str | Path,
     schema_name: str = "cv_standard",
@@ -162,7 +169,7 @@ def extract_to_json(
     pdf_path = Path(pdf_path)
     out_dir = Path(out_dir); out_dir.mkdir(parents=True, exist_ok=True)
 
-    # we still use the schema to tell the model which keys to use
+    # we use the schema to tell the model which keys to use
     if schema_name not in SCHEMAS:
         raise ValueError(f"Unknown schema '{schema_name}'. Available: {list(SCHEMAS)}")
     model_cls: Type = SCHEMAS[schema_name]
@@ -172,7 +179,7 @@ def extract_to_json(
     _dbg(debug, f"[extract] file={pdf_path.name} used_ocr={used_ocr} len(text)={len(doc_text)}")
 
     if not doc_text:
-        # still write meta even if empty
+        # write meta even if empty
         meta_path = out_dir / f"{pdf_path.stem}.{schema_name}.meta.json"
         meta_obj = {
             "file_name": pdf_path.name,
@@ -195,10 +202,10 @@ def extract_to_json(
     
     _dbg(debug, "[extract] prompt preview:\n", prompt[:600], "...\n---")
 
-    raw = generate(prompt, thinking=False, max_new_tokens=5000)
+    raw = generate(prompt, thinking=False, max_new_tokens=5000) # enough tokens
     _dbg(debug, "[extract] raw LLM output (head):\n", (raw[:600] + "..." if len(raw) > 600 else raw), "\n---")
 
-    # Save raw output exactly as returned by the model (no parsing / repairing)
+    # Save raw output exactly as returned by the model
     raw_path = out_dir / f"{pdf_path.stem}.{schema_name}.raw.json"
     raw_path.write_text(raw, encoding="utf-8")
 

@@ -20,6 +20,7 @@ SAFE_BUILTINS = {
 # Safe modules to allow in the execution environment
 SAFE_MODULES = {"math": math, "statistics": statistics, "random": random}
 
+# extract Python code block from text
 def _extract_code_block(text: str) -> str:
     m = re.search(r"```python\s*(.*?)```", text, flags=re.DOTALL | re.IGNORECASE)
     if m:
@@ -28,6 +29,7 @@ def _extract_code_block(text: str) -> str:
     m2 = re.search(r"```(.*?)```", text, flags=re.DOTALL)
     return (m2.group(1).strip() if m2 else text.strip())
 
+# Validate code for safety: no imports, no forbidden tokens
 def _validate(code: str) -> Tuple[bool, str]:
     if FORBIDDEN_PATTERN.search(code):
         return False, "Forbidden token found (imports / IO / system operations are blocked)."
@@ -44,6 +46,8 @@ def _validate(code: str) -> Tuple[bool, str]:
         return False, f"Invalid Python code: {e}"
     return True, ""
 
+# Safely execute Python code with timeout, capturing stdout and result
+# executes in a separate thread to enforce timeout
 def safe_exec(code: str, timeout_s: float = 3.0) -> Dict[str, Any]:
     ok, msg = _validate(code)
     if not ok:

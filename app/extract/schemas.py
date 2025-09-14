@@ -36,6 +36,7 @@ class CVProject(BaseModel):
     technologies: Optional[List[str]] = None
     links: Optional[List[str]] = None
 
+# We use only this schema for CV extraction
 class CVStandard(BaseModel):
     # meta
     file_name: Optional[str] = None

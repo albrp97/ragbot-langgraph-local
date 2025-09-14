@@ -9,23 +9,26 @@ import torch
 from ultralytics import YOLO
 from PIL import Image
 
-# Config (reuses your .env if present)
+# Load environment variables
 DEVICE = os.getenv("DEVICE", "auto").lower()
 WEIGHTS = os.getenv("DETECTOR_WEIGHTS", "yolo11n.pt")
 SAMPLES_DIR = Path("data/car_people_samples")
 OUT_DIR = Path("data/detector_out")
 
+# returns device to use for model inference
 def resolve_device() -> str:
     if DEVICE == "cuda" or (DEVICE == "auto" and torch.cuda.is_available()):
         return "cuda"
     return "cpu"
 
+# loads model
 def load_model() -> YOLO:
     dev = resolve_device()
     model = YOLO(WEIGHTS)
     model.to(dev)
     return model
 
+# convert a single YOLO result to JSON for all detected classes
 def to_json_dets(result, class_names: dict[int, str]):
     dets = []
     if result is None or result.boxes is None or len(result.boxes) == 0:
@@ -48,10 +51,12 @@ def to_json_dets(result, class_names: dict[int, str]):
         })
     return dets
 
+# main function to run the test script
 def main():
     SAMPLES_DIR.mkdir(parents=True, exist_ok=True)
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
+    # Find images in samples directory
     images = sorted([p for p in SAMPLES_DIR.iterdir() if p.suffix.lower() in {".jpg", ".jpeg", ".png"}])
     if not images:
         print(f"⚠️ No images found under {SAMPLES_DIR}. Put a few photos there.")
@@ -65,6 +70,7 @@ def main():
 
     all_results = []
 
+    # Process each image
     for img_path in images:
         im = Image.open(img_path).convert("RGB")
         t0 = time.perf_counter()
@@ -95,7 +101,7 @@ def main():
         all_results.append(out_json)
         print(f"✅ {img_path.name}: {len(dets)} detections in {dt_ms:.1f} ms")
 
-    # Combined summary
+    # Save summary JSON
     (OUT_DIR / "summary.json").write_text(json.dumps(all_results, indent=2), encoding="utf-8")
     print(f"\n📁 Results saved to {OUT_DIR.resolve()}")
 

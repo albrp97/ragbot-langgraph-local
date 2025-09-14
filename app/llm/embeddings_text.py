@@ -7,6 +7,7 @@ from app.config.settings import settings
 _model = None
 _tokenizer = None
 
+# set ups device and dtype
 def _device():
     if settings.device == "cuda" and torch.cuda.is_available():
         return torch.device("cuda")
@@ -15,6 +16,7 @@ def _device():
 def _dtype():
     return torch.float16 if (_device().type == "cuda") else torch.float32
 
+# loads embedding model if not already loaded
 def _load_embedding_model():
     global _model, _tokenizer
     if _model is not None:
@@ -29,6 +31,7 @@ def _load_embedding_model():
     _model.eval()
     return _model, _tokenizer
 
+# mean pooling for sentence embeddings
 @torch.inference_mode()
 def _mean_pool(last_hidden_state, attention_mask):
     mask = attention_mask.unsqueeze(-1).expand(last_hidden_state.size()).float()
@@ -36,6 +39,7 @@ def _mean_pool(last_hidden_state, attention_mask):
     counts = torch.clamp(mask.sum(dim=1), min=1e-9)
     return summed / counts
 
+# embeds a list of texts into vectors
 @torch.inference_mode()
 def embed_texts(texts: List[str]) -> List[List[float]]:
     model, tokenizer = _load_embedding_model()

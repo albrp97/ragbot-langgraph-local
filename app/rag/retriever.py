@@ -10,6 +10,7 @@ def _embeddings():
         encode_kwargs={"normalize_embeddings": True, "batch_size": settings.embedding_batch_size},
     )
 
+# returns a LangChain retriever with MMR search
 def get_retriever(k: int | None = None, collection_name: str = "docs_text", allowed_sources: list[str] | None = None):
     k = k or settings.retriever_k
     vs = Chroma(

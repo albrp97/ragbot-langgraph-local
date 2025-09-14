@@ -1,46 +1,68 @@
-Here’s a concise, high-level take on each point:
 
-1. Differences between “completion” and “chat” models
+### Completion and chat models
 
-* Completion: single text-in → text-out; no roles; you craft the whole prompt. Good for templated generations and legacy APIs.
-* Chat: multi-turn with roles (system/user/assistant), built-in conversation handling and safety. Better instruction following, tool use, and memory.
+- Completion models do not have context of any older messages, they complete text without memory
+- Chat models are trained with instructions, dislogs and roles. They work with multi turn context
 
-2. Reasoning model vs generalist model
+### Reasoning and generalistic models
 
-* Generalist: fast, broad capability; answers directly from the prompt+context.
-* Reasoning: trained/optimized to think step-by-step (internal reasoning, tool use, deliberate decoding). Pros: harder tasks, better reliability; Cons: slower, costlier.
+- Generalist models are trained for several task, they will solve superficial tasks and are usually used for conversation since the latency per response is lower
+- Reasoning models are finetuned with a chain of thought and instructions step by step to solve precise tasks. They are slower as they generate more tokens but are better at solving logic, math and planning prompts
 
-3. Forcing “yes/no” and parsing fixed formats
+### Forcing yes/no and formatted outputs
 
-* Prompting: “Answer strictly ‘yes’ or ‘no’.” Set temperature low.
-* Constrained output: JSON schema/function-calling, Pydantic/Output Parsers, or grammar-constrained decoding (EBNF) so only valid shapes are allowed.
-* Logit bias (if API supports) to allow only “yes”/“no”.
-* Post-parse: validate with a schema; on failure, reprompt with the parse error.
+- Clear instructions in the prompt (system or user)
+- Examples of responses in the prompt
+- Regex parsing after generation, json validations, expected tokens
+- Second run with another prompt only for formatting
 
-4. RAG vs fine-tuning (when/why; pros/cons)
+### RAG vs fine tuning
 
-* RAG (retrieve-then-generate):
+#### RAG
 
-  * Use when knowledge lives in documents & must stay fresh/traceable.
-  * Pros: up-to-date, cheaper, grounded answers with citations.
-  * Cons: needs good retrieval; can fail if docs or chunks are poor.
-* Fine-tuning:
+- Up to date information
+- Model agnostic
+- Cheaper, more flexible, easier to update
+- Source citation
+- Depends on retrieval performance
+- Higher latency
 
-  * Use to adapt style, format, domain behaviors; when patterns recur and docs aren’t needed at runtime.
-  * Pros: fast inference, smaller prompts, domain tone.
-  * Cons: static (needs retraining to update), cost to train, risk of memorization.
+#### Fine tuning
 
-5. What is an agent?
+- Learns style and specific tasks and outputs
+- Lower latency
+- High effort and high cost to update
+- Requires quality data
+- Risk of memorization
 
-* An LLM loop that can plan → call tools (search, code, DB) → observe results → decide next step until a goal is reached.
-* Think “LLM + tools + memory + policy” rather than a single response.
+### Agent
 
-6. Evaluating Q\&A bots, RAG, and GenAI apps (tools & metrics)
+- AI system that uses an LLM as core with capabilities to use tool (APIs, databsaes, code, etc), planning and loops decision making until an objetive is completed
 
-* Q\&A bot (end-to-end): exact match / F1 on golden sets, human rated helpfulness, latency, cost, safety (toxicity/jailbreak).
-* RAG (component + end-to-end):
+### Performace evaluation
 
-  * Retrieval: Recall\@k, Precision\@k, MRR / nDCG, context hit rate (answer found in context).
-  * Generation: faithfulness/groundedness (does it cite provided context?), answer correctness (LLM-as-judge + spot-checks), citation accuracy.
-* GenAI app (overall): task success rate, consistency/regression tests, UX metrics (time-to-answer), observability (traces, prompts, tool calls).
-* Useful tooling: Ragas, DeepEval, TruLens, LangChain Benchmarks, Evals with golden datasets, A/B tests, prompt unit tests, telemetry dashboards.
+#### Q&A bot
+
+- Ground truth testing dataset, exact match and f1
+- Compare context for hallucinations
+- Human evaluation and automated with a comparison model
+- Rated helpfulness
+- Latency, cost, jailbreak score
+
+#### RAG
+
+- Retrieval - Context relevance measuring (hit rate) if the answer is found in context
+- Generation - Groundedness citing the provided context and answer correctness with a comparison LLM
+
+#### Gen AI
+
+- Metrics like Rouge, Bleu, BertScore, for summary or translation
+- Perplexity metric for LLMs
+- Fact checking with a 'better' model and cross checking making the model explain the reasoning or sources
+- Guardrails and pydantic for formatting
+
+#### Tools
+
+ - Ragas
+ - DeepEval
+ - TruLens

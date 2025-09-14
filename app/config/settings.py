@@ -1,6 +1,7 @@
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+# load settings from environment or .env file
 class Settings(BaseSettings):
     model_id: str = Field(default="Qwen/Qwen3-0.6B", alias="MODEL_ID")
     embedding_id: str = Field(default="Qwen/Qwen3-Embedding-0.6B", alias="EMBEDDING_ID")

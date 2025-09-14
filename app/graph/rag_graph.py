@@ -27,7 +27,6 @@ class RAGState(TypedDict, total=False):
     extract_results: List[Dict[str, Any]]
 
 # --- Router ---
-# --- Router: explicit commands + smart python detection ---
 _CMD_PY = re.compile(r"^\s*python\b", re.I)
 _CMD_EXTRACT = re.compile(r"^\s*extract\b", re.I)
 
@@ -94,6 +93,7 @@ def route(state: RAGState) -> RAGState:
     return {"route": "rag", "query": q.strip()}
 
 # ---- Helpers ----
+# Format context documents for prompt
 def _format_context(docs: List[Document]) -> str:
     lines = []
     for d in docs:
@@ -105,6 +105,7 @@ def _format_context(docs: List[Document]) -> str:
         lines.append(f"[{Path(src).name} p.{page}] {text}")
     return "\n\n".join(lines)
 
+# Collect unique sources from documents
 def _collect_sources(docs: List[Document]) -> List[Dict[str, Any]]:
     out, seen = [], set()
     for d in docs:
@@ -118,6 +119,7 @@ def _collect_sources(docs: List[Document]) -> List[Dict[str, Any]]:
         seen.add(key)
     return out
 
+# System prompt for LLM
 SYSTEM_PROMPT = (
     "You are a helpful assistant for question answering over provided documents. "
     "Use ONLY the given context and, if present, the conversation memory. "
@@ -159,6 +161,7 @@ def prepare_memory(state: RAGState) -> RAGState:
     mem = compress_if_needed(history)
     return {"memory_summary": mem}
 
+# Retrieve relevant documents based on query and allowed sources
 def retrieve(state: RAGState) -> RAGState:
     query = state["query"]
     allowed = state.get("allowed_sources")
@@ -166,6 +169,7 @@ def retrieve(state: RAGState) -> RAGState:
     docs = retriever.invoke(query)
     return {"context_docs": docs}
 
+# Generate final answer using LLM
 def generate_answer(state: RAGState) -> RAGState:
     docs = state.get("context_docs", [])
     question = state["query"]
@@ -185,12 +189,12 @@ def generate_answer(state: RAGState) -> RAGState:
 
     return {"answer": text.strip(), "sources": sources}
 
-
+# Run Python tool to answer the query
 def run_python(state: RAGState) -> RAGState:
     res = run_python_for_question(state["query"], timeout_s=3.0)
     return {"python": res}
 
-# NEW
+# Run structured extraction on selected PDFs
 def structured_extract(state: RAGState) -> RAGState:
     """Run CV detection + structured extraction over selected PDFs."""
     allowed = state.get("allowed_sources") or []
@@ -203,6 +207,7 @@ def structured_extract(state: RAGState) -> RAGState:
     summaries: List[Dict[str, Any]] = []
     srcs: List[Dict[str, Any]] = []
 
+    # process each allowed file
     for fname in allowed:
         pdf = raw_dir / fname
         if not pdf.exists():
@@ -211,7 +216,7 @@ def structured_extract(state: RAGState) -> RAGState:
         det = detect_cv(pdf)
         if not det.get("is_cv", False):
             continue
-        # extract & read parsed JSON back to summarize a few fields
+        # extract and read parsed JSON back to summarize a few fields
         json_path = extract_to_json(pdf, schema_name="cv_standard", out_dir=out_dir, debug=False)
         try:
             import json
@@ -250,6 +255,9 @@ def structured_extract(state: RAGState) -> RAGState:
     return {"answer": human, "sources": srcs, "extract_results": summaries}
 
 # ---- Build ----
+# Build the RAG graph
+# Summary of the graph:
+# prepare_memory -> route -> {rag -> retrieve -> generate_answer}
 def build_rag_graph():
     g = StateGraph(state_schema=RAGState)
     g.add_node("prepare_memory", prepare_memory)

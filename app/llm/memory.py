@@ -9,6 +9,8 @@ _tokenizer = AutoTokenizer.from_pretrained(settings.model_id, trust_remote_code=
 def _count_tokens(text: str) -> int:
     return len(_tokenizer(text, add_special_tokens=False).input_ids)
 
+# Summarize conversation history to fit within budget_tokens
+# returns the summary string
 def summarize_history(pairs: List[Tuple[str, str]], budget_tokens: int) -> str:
     """Resume turns (user, assistant) en <= budget_tokens."""
     if not pairs:
@@ -34,8 +36,10 @@ def summarize_history(pairs: List[Tuple[str, str]], budget_tokens: int) -> str:
         summary = summary[: int(len(summary) * 0.9)].strip()
     return summary
 
+# Compress conversation history if it exceeds token_limit_history
+# returns the summary string or empty if no summary needed
 def compress_if_needed(history_pairs: List[Tuple[str, str]]) -> str:
-    """Devuelve memoria comprimida si el historial supera TOKEN_LIMIT_HISTORY y la imprime."""
+    """Compress conversation history if it exceeds token_limit_history."""
     if not history_pairs:
         return ""
 

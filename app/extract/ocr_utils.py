@@ -20,6 +20,8 @@ else:
             pytesseract.pytesseract.tesseract_cmd = p
             break
 
+# render first N pages via PyMuPDF and OCR them with Tesseract
+# TODO test
 def ocr_first_pages(pdf_path: str | Path, max_pages: int = 2, dpi: int = 200, lang: str = "eng") -> str:
     """Render first N pages via PyMuPDF and OCR them with Tesseract."""
     pdf_path = Path(pdf_path)
