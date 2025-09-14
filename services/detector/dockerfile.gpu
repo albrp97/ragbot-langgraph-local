@@ -1,0 +1,12 @@
+FROM ultralytics/ultralytics:latest
+
+WORKDIR /app
+COPY services/detector/app.py /app/app.py
+
+RUN pip install --no-cache-dir "fastapi>=0.110" "uvicorn[standard]>=0.23"
+
+ENV DEVICE=cuda
+ENV DETECTOR_WEIGHTS=yolo11n.pt
+
+EXPOSE 8001
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8001"]
