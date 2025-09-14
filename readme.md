@@ -1,4 +1,4 @@
-# RAGBot — LangGraph (Challenge Submission)
+# RAGBot — LangGraph
 
 This repository contains my solution for a 3-part challenge:
 
