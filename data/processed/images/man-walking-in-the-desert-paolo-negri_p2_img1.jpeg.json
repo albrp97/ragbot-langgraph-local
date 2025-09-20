@@ -13,5 +13,5 @@
   "modality": "image",
   "content_type": "image_caption",
   "caption_model_id": "Salesforce/blip-image-captioning-large",
-  "created": "2025-09-13T10:09:15Z"
+  "created": "2025-09-17T14:38:57Z"
 }

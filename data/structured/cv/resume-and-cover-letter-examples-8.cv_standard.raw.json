@@ -1,0 +1,84 @@
+{
+  "file_name": "sample-business-resume.pdf",
+  "pages": 3,
+  "is_cv": true,
+  "detector_score": 0.85,
+  "name": "JOE STUDENT",
+  "email": "jstudent@stanford.edu",
+  "phone": "(650) 555-1212",
+  "location": "Stanford, CA",
+  "websites": ["https://stanford.edu"],
+  "social_handles": ["https://stanford.edu"],
+  "objective": "To provide academic and professional support to students and professionals in the field of economics and international relations.",
+  "summary": "This resume highlights JOE Student's academic background, professional experience, and contributions to the field of economics and international relations.",
+  "education": [
+    {
+      "institution": "Stanford University",
+      "location": "Stanford, CA",
+      "degree": "BA in Economics; Honors Candidate in Economics.",
+      "year": "9/XX - 12/XX"
+    },
+    {
+      "institution": "Oxford University",
+      "location": "Oxford, England",
+      "degree": "Completed tutorial on the Political Economy of Trade and Trade Agreements.",
+      "year": "9/XX - 12/XX"
+    }
+  ],
+  "experience": [
+    {
+      "company": "National Economic Research Associates (NERA)",
+      "location": "White Plains, NY",
+      "role": "Research Assistant",
+      "start_date": "6/XX",
+      "end_date": "8/XX",
+      "description": "Worked with a team of four researchers on cases relating to antitrust, intellectual property and labor economics. Conducted quantitative and qualitative research, collected and analyzed data, created and managed spreadsheets."
+    },
+    {
+      "company": "Galleon Group",
+      "location": "New York, NY",
+      "role": "Summer Analyst",
+      "start_date": "6/XX",
+      "end_date": "8/XX",
+      "description": "Assigned to track a group of technology companies for the New York based hedge fund, Galleon Group. Worked with three other analysts in collecting and analyzing relevant financial statistics, performed qualitative research to form an assessment of the current status of the companies."
+    },
+    {
+      "company": "Economics Tutor",
+      "location": "Stanford, CA",
+      "role": "Intern",
+      "start_date": "5/XX",
+      "end_date": "7/XX",
+      "description": "Assisted students with understanding concepts and solving problems in micro and macro economics, econometrics and statistics. Organized review sessions and prepared practice problems for upcoming exams."
+    }
+  ],
+  "projects": [
+    {
+      "title": "SPLASH Underserved Student Recruiter and Teacher",
+      "location": "Stanford, CA",
+      "description": "Communicated with primary contacts at various low-income high schools in the bay area to draw hundreds of students to attend Fall SPLASH 2012. Assisted in the logistical planning as a member of the administration team. Taught classes on the biology and historical context of lactose intolerance to students attending Spring SPLASH 20XX."
+    },
+    {
+      "title": "ThinkMath Instructor, Trainer, and Assistant Team Lead",
+      "location": "Stanford, CA",
+      "description": "Taught elementary school students from a Singaporean math curriculum. Led training sessions for new ThinkMath instructors about lesson planning and teaching techniques. Organized placement results for students and communicated with parents on site."
+    }
+  ],
+  "skills": [
+    "Computer: Proficient in Excel, PowerPoint, and FileMaker.",
+    "Language: Proficient in speaking and writing French"
+  ],
+  "flat_skills": [
+    "Computer: Excel, PowerPoint, FileMaker",
+    "Language: French"
+  ],
+  "certifications": ["Stanford University CPR/AED for Professional Rescuers"],
+  "awards": ["Bio-X Undergraduate Summer Research Grant"],
+  "publications": ["Smithfield A, Doe J. Ethical Challenges in Enrolling Women in Research Studies. Journal of Medical Ethics, 2020."],
+  "languages": [
+    "French"
+  ],
+  "activities": [
+    "SPLASH Underserved Student Recruiter and Teacher",
+    "ThinkMath Instructor, Trainer, and Assistant Team Lead"
+  ]
+}

@@ -36,6 +36,9 @@ class Settings(BaseSettings):
     # ---- Image captions (VLM) ----
     image_retrieval_id: str = Field(default="Salesforce/blip-image-captioning-large", alias="IMAGE_RETRIEVAL_ID")
     images_dir: str = Field(default="./data/processed/images", alias="IMAGES_DIR")
+    
+    detector_model: str = Field(default="yolov11n.pt", alias="DETECTOR_MODEL")
+    detector_port: int = Field(default=8000, alias="DETECTOR_PORT")
 
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", case_sensitive=False)
